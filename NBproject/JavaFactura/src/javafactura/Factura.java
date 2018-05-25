@@ -14,12 +14,13 @@ public class Factura
     private String designacao; 
     private LocalDateTime dataDespesa;
     private int nifCliente;
-    private int descricao;
+    private String descricao; 
     private int atividade; //tipo 
     private float valor;
     private boolean confirmado;
+    private float valorDeduzido; //TODO
 
-    public Factura(String id, int nifEmitente, String designacao, LocalDateTime dataDespesa, int nifCliente, int descricao, int atividade, float valor, boolean confirmado) {
+    public Factura(String id, int nifEmitente, String designacao, LocalDateTime dataDespesa, int nifCliente, String descricao, int atividade, float valor, boolean confirmado, float valorDeduzido) {
         this.id = id;
         this.nifEmitente = nifEmitente;
         this.designacao = designacao;
@@ -29,6 +30,7 @@ public class Factura
         this.atividade = atividade;
         this.valor = valor;
         this.confirmado = confirmado;
+        this.valorDeduzido = valorDeduzido;
     }
     
     public Factura(Factura f){
@@ -41,6 +43,7 @@ public class Factura
         this.atividade = f.getAtividade();
         this.valor = f.getValor();
         this.confirmado = f.getConfirmado(); 
+        this.valorDeduzido = f.getValorDeduzido();
     }
 
     public String getId() {
@@ -83,11 +86,11 @@ public class Factura
         this.nifCliente = nifCliente;
     }
 
-    public int getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(int descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
@@ -111,11 +114,22 @@ public class Factura
     public boolean getConfirmado() {
         return this.confirmado;
     }
-   
+    
+    
 
     public void setConfirmado(boolean confirmado) {
         this.confirmado = confirmado;
     }
+
+    public float getValorDeduzido() {
+        return valorDeduzido;
+    }
+
+    public void setValorDeduzido(float valorDeduzido) {
+        this.valorDeduzido = valorDeduzido;
+    }
+    
+    
     
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -142,7 +156,7 @@ public class Factura
         Factura fac = (Factura) o;
         return (this.id.equals(fac.getId()) && this.nifEmitente == fac.getNifEmitente() 
                 && this.designacao.equals(fac.getDesignacao()) && this.dataDespesa.equals(fac.getDataDespesa())
-                && this.nifCliente == fac.getNifCliente() && this.descricao == fac.getDescricao()
+                && this.nifCliente == fac.getNifCliente() && this.descricao.equals(fac.getDescricao())
                 && this.atividade == fac.getAtividade() && this.valor == fac.getValor()
                 && this.confirmado == fac.getConfirmado()
                 ) ;

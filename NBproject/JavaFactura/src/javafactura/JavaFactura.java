@@ -1,5 +1,8 @@
 package javafactura;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 /**
  * Write a description of class JavaFactura here.
@@ -13,6 +16,7 @@ public class JavaFactura
     private List<Contribuinte> contribuintes;
     private List<Factura> facturas;
     private Admin admin;
+    private Map<Integer,Float> coefs;
 
    
     public JavaFactura(Admin admin)
@@ -20,12 +24,14 @@ public class JavaFactura
     this.admin = admin;
     this.contribuintes = new ArrayList<Contribuinte>();
     this.facturas = new ArrayList<Factura>();
+    this.coefs = new HashMap<Integer,Float>();
     }
     
     public JavaFactura(JavaFactura jf){
         this.admin = jf.getAdmin();
         this.contribuintes = jf.getContribuintes();
         this.facturas = jf.getFacturas();
+        this.coefs= jf.getCoefs();
     }
     
     public Admin getAdmin(){
@@ -52,6 +58,20 @@ public class JavaFactura
     public void setFactura(List<Factura> factura){
         this.facturas = factura;
     }
+    public Map<Integer,Float> getCoefs() {
+        return this.coefs;
+    }
+    
+    public void addCoef(int atividade, float coef){
+        this.coefs.put(atividade, coef);
+    }
+    
+    public Float getCoef(int atividade){
+        float coef;
+        if (!coefs.containsKey(atividade)) coef=0;
+        else coef= coefs.get(atividade);
+        return coef;
+    }
     
     public List<Factura> getFacturasWithNIF(int NIF){
        List<Factura> facc = new ArrayList<Factura>();
@@ -60,7 +80,7 @@ public class JavaFactura
         });
        return facc;
     }
-    
+    //Facturas para Validar Movimento
     public List<Factura> getFacturasPorConfirmar(int NIF){
        List<Factura> facc = new ArrayList<Factura>();
        facturas.stream().filter((f) -> (f.getNifCliente() == NIF && !f.getConfirmado())).forEach((f) -> {
@@ -69,8 +89,51 @@ public class JavaFactura
        return facc;
     }
     
+    public void ValidarMovimento(Factura f){
+        f.setConfirmado(true);
+    }
     
+    //Funcao que emite factura de uma empresa para um individuo
+    public void emitirFactura(Empresa emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int tipoAtividade, int valorDesp){
+        String id = String.valueOf(this.facturas.size());
+        int nifEmitente = emp.getNif();
+        float coefEmp = emp.getFactorEmpresarial();
+        String designacao = emp.getDesignacao(); 
+        LocalDateTime dataDespesa = LocalDateTime.of(year,month,day,hour,minute);
+        int nifCliente = NIF;
+        String descricao = descricaoDesp;
+        int atividade;
+        float valorDeduzido;
+        float valor= valorDesp;
+        boolean confirmado=false;
+            if(emp.getAtividades().size()==1) {atividade = tipoAtividade;
+                valorDeduzido=getValorDeduzido(nifEmitente, atividade, valor, coefEmp); //fazerAlgoritmo
+            }
+            else {atividade = -1;
+                valorDeduzido=0;
+            }
+        Factura f = new Factura(id,nifEmitente,designacao,dataDespesa,nifCliente, descricao, atividade,
+                                valor, confirmado, valorDeduzido);
     
+    this.facturas.add(f);
+    }
+    
+    public float getValorDeduzidoAnual(int nifC){
+        List<Factura> facc = this.getFacturasWithNIF(nifC);
+        float valorTotal =0;
+        for (Factura f: facc) {
+            valorTotal+= f.getValorDeduzido();
+        }
+        return valorTotal;
+    }
+    
+    public float getValorDeduzido(int nifEmitente,int atividade,float valor, float coefEmp){
+        float valorDeduzido=0;
+        if(this.coefs.containsKey(atividade)){
+            valorDeduzido= valor* coefEmp * this.coefs.get(atividade);
+        }
+        return valorDeduzido;
+    }
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Contribuintes:\n");
