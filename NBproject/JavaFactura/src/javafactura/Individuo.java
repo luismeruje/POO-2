@@ -1,3 +1,7 @@
+package javafactura;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Write a description of class Individuo here.
@@ -8,27 +12,79 @@
 public class Individuo extends Contribuinte
 {
     // instance variables - replace the example below with your own
-    private List<int> nifAgregado;
+    private List<Integer> nifAgregado;
     private float coefFiscal;
-    private List<int> atividades;
-    /**
-     * Constructor for objects of class Individuo
-     */
-    public Individuo()
-    {
-        // initialise instance variables
-        x = 0;
+    private List<Integer> atividades;
+
+    
+    public Individuo(float coefFiscal,int nif, String email, String nome, String morada, String password) {
+        super(nif, email, nome, morada, password);
+        this.nifAgregado = new ArrayList<>();
+        this.coefFiscal = coefFiscal;
+        this.atividades = new ArrayList<>();
+    }
+    
+    public Individuo(Individuo i){
+        super(i);
+        this.nifAgregado=i.getAgregadoFamiliar();
+        this.coefFiscal= i.getCoefFiscal();
+        this.atividades = i.getAtividades();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    
+   //existsAgregado?
+    public List<Integer> getAgregadoFamiliar(){
+        return this.nifAgregado;
     }
+
+    public void setAgregado(Integer agregado) {
+        this.nifAgregado.add(agregado);
+    }
+
+    public float getCoefFiscal() {
+        return coefFiscal;
+    }
+
+    public void setCoefFiscal(float coefFiscal) {
+        this.coefFiscal = coefFiscal;
+    }
+
+    public List<Integer> getAtividades(){
+        return this.atividades;
+    }
+
+    public void setAtividade(Integer atividade) {
+        this.atividades.add(atividade);
+    }
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Agregado familiar: \n");
+        for(Integer agre: this.nifAgregado)
+            sb.append(agre + "\n");
+        
+        sb.append("Coeficiente Fiscal: "); sb.append(this.coefFiscal);
+        sb.append("Atividades : \n");
+        for(Integer ati: this.atividades)
+            sb.append(ati + "\n");
+        return sb.toString();
+    }
+    public boolean equals(Object o){
+        if (this == o) 
+            return true;
+        
+        if ((o==null) || (this.getClass() != o.getClass())) 
+            return false;
+        Individuo ind = (Individuo) o;
+        return (this.nifAgregado.equals(ind.getAgregadoFamiliar()) && this.coefFiscal == ind.getCoefFiscal() 
+                && this.atividades.equals(ind.getAtividades())
+                ) ;
+        
+    }
+    
+    public Individuo clone(){
+         return new Individuo(this);
+     }
+    
 }
