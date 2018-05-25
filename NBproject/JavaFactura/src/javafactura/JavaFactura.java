@@ -73,6 +73,24 @@ public class JavaFactura
         return coef;
     }
     
+    //Devolve se conta foi encontrada ou nao
+    public boolean login(String NIF,String Password){
+        int nifC;
+        boolean encontrado=false;
+        nifC= Integer.valueOf(NIF);
+        for(Contribuinte c: this.contribuintes){
+            if(c.getNif()==nifC){
+                if(c.getPassword().equals(Password))
+                    encontrado=true;
+                break;
+            } 
+                
+        }
+        return encontrado;
+    }
+
+    
+    //Procura todas as faturas com o NIF do Contribuinte
     public List<Factura> getFacturasWithNIF(int NIF){
        List<Factura> facc = new ArrayList<Factura>();
        facturas.stream().filter((f) -> (f.getNifCliente() == NIF || f.getNifEmitente() == NIF )).forEach((f) -> {
