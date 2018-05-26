@@ -31,7 +31,7 @@ public class JavaFactura implements Serializable
 
     public JavaFactura()
     {
-    this.admin = null;
+    this.admin = new Admin("Melon");
     this.contribuintes = new HashMap<Integer,Contribuinte>();
     this.facturas = new HashMap<Integer,Factura>();
     this.coefs = new HashMap<Integer,Float>();
