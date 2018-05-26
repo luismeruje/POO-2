@@ -112,7 +112,6 @@
                               <Component id="ButtonVoltar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="ButtonConfirmar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -127,14 +126,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="CheckBoxRestauracao" min="-2" max="-2" attributes="0"/>
-                          <Component id="CheckBoxEducacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="CheckBoxSaude" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxRestauracao" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxEducacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxSaude" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="CheckBoxHabitacao" min="-2" max="-2" attributes="0"/>
-                          <Component id="CheckBoxDespesasFamiliares" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxHabitacao" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxDespesasFamiliares" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -149,9 +148,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="TextFieldNome" alignment="0" pref="415" max="32767" attributes="0"/>
-                                  <Component id="TextFieldEmail" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="TextFieldMorada" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="textFieldNome" alignment="0" pref="415" max="32767" attributes="0"/>
+                                  <Component id="textFieldEmail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="textFieldMorada" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -160,8 +159,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="TextFieldPassword" pref="160" max="32767" attributes="0"/>
-                                  <Component id="TextFieldNIF" max="32767" attributes="0"/>
+                                  <Component id="textFieldPassword" pref="160" max="32767" attributes="0"/>
+                                  <Component id="textFieldNIF" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -170,10 +169,10 @@
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField6" min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="textFieldFator" min="-2" pref="67" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -190,9 +189,9 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="ButtonVoltar" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ButtonConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ButtonConfirmar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -202,21 +201,21 @@
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="TextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextFieldNIF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldNIF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="TextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="TextFieldMorada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldMorada" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -225,20 +224,20 @@
               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CheckBoxRestauracao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CheckBoxHabitacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxRestauracao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxHabitacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CheckBoxEducacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CheckBoxDespesasFamiliares" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxEducacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxDespesasFamiliares" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="CheckBoxSaude" min="-2" max="-2" attributes="0"/>
+              <Component id="checkBoxSaude" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldFator" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
           </Group>
@@ -275,19 +274,22 @@
         <Property name="orientation" type="int" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextFieldNome">
+    <Component class="javax.swing.JTextField" name="textFieldNome">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldNomeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldNomeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextFieldNIF">
+    <Component class="javax.swing.JTextField" name="textFieldNIF">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldNIFActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldNIFActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextFieldEmail">
+    <Component class="javax.swing.JTextField" name="textFieldEmail">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldEmailActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextFieldMorada">
+    <Component class="javax.swing.JTextField" name="textFieldMorada">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -297,7 +299,7 @@
         <Property name="text" type="java.lang.String" value="Preencha as suas informa&#xe7;&#xf5;es"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TextFieldPassword">
+    <Component class="javax.swing.JTextField" name="textFieldPassword">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -342,33 +344,33 @@
         <Property name="text" type="java.lang.String" value="Indique as atividades econ&#xf3;micas que a empresa suporta"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="CheckBoxRestauracao">
+    <Component class="javax.swing.JCheckBox" name="checkBoxRestauracao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Restaura&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckBoxRestauracaoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxRestauracaoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="CheckBoxSaude">
+    <Component class="javax.swing.JCheckBox" name="checkBoxSaude">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sa&#xfa;de"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="CheckBoxEducacao">
+    <Component class="javax.swing.JCheckBox" name="checkBoxEducacao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Educa&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckBoxEducacaoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxEducacaoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="CheckBoxHabitacao">
+    <Component class="javax.swing.JCheckBox" name="checkBoxHabitacao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Habita&#xe7;&#xe3;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="CheckBoxDespesasFamiliares">
+    <Component class="javax.swing.JCheckBox" name="checkBoxDespesasFamiliares">
       <Properties>
         <Property name="text" type="java.lang.String" value="Despesas Familiares"/>
       </Properties>
@@ -385,15 +387,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonConfirmarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fator que a empresa apresenta no c&#xe1;lculo de dedu&#xe7;&#xe3;o fiscal:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField6">
+    <Component class="javax.swing.JTextField" name="textFieldFator">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField6ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldFatorActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

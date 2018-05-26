@@ -5,17 +5,26 @@
  */
 package javafactura;
 
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author utilizador
  */
 public class RegistarContribuinteColetivo extends javax.swing.JFrame {
-
+    JavaFactura javaFactura;
+    Login returnPage;
     /**
      * Creates new form RegistarContribuinteColetivo
+     * @param javaFactura instância da classe central.
      */
-    public RegistarContribuinteColetivo() {
+    public RegistarContribuinteColetivo(JavaFactura javaFactura, Login returnPage) {
         initComponents();
+        this.javaFactura = javaFactura;
+        this.setLocationRelativeTo(null);
+        this.returnPage = returnPage;
     }
 
     /**
@@ -44,12 +53,12 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        TextFieldNome = new javax.swing.JTextField();
-        TextFieldNIF = new javax.swing.JTextField();
-        TextFieldEmail = new javax.swing.JTextField();
-        TextFieldMorada = new javax.swing.JTextField();
+        textFieldNome = new javax.swing.JTextField();
+        textFieldNIF = new javax.swing.JTextField();
+        textFieldEmail = new javax.swing.JTextField();
+        textFieldMorada = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        TextFieldPassword = new javax.swing.JTextField();
+        textFieldPassword = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -57,15 +66,15 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
-        CheckBoxRestauracao = new javax.swing.JCheckBox();
-        CheckBoxSaude = new javax.swing.JCheckBox();
-        CheckBoxEducacao = new javax.swing.JCheckBox();
-        CheckBoxHabitacao = new javax.swing.JCheckBox();
-        CheckBoxDespesasFamiliares = new javax.swing.JCheckBox();
+        checkBoxRestauracao = new javax.swing.JCheckBox();
+        checkBoxSaude = new javax.swing.JCheckBox();
+        checkBoxEducacao = new javax.swing.JCheckBox();
+        checkBoxHabitacao = new javax.swing.JCheckBox();
+        checkBoxDespesasFamiliares = new javax.swing.JCheckBox();
         ButtonVoltar = new javax.swing.JButton();
         ButtonConfirmar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        textFieldFator = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
         jLabel1.setText("JavaFatura");
@@ -102,15 +111,21 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        TextFieldNome.addActionListener(new java.awt.event.ActionListener() {
+        textFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextFieldNomeActionPerformed(evt);
+                textFieldNomeActionPerformed(evt);
             }
         });
 
-        TextFieldNIF.addActionListener(new java.awt.event.ActionListener() {
+        textFieldNIF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextFieldNIFActionPerformed(evt);
+                textFieldNIFActionPerformed(evt);
+            }
+        });
+
+        textFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldEmailActionPerformed(evt);
             }
         });
 
@@ -133,25 +148,25 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel15.setText("Indique as atividades económicas que a empresa suporta");
 
-        CheckBoxRestauracao.setText("Restauração");
-        CheckBoxRestauracao.addActionListener(new java.awt.event.ActionListener() {
+        checkBoxRestauracao.setText("Restauração");
+        checkBoxRestauracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckBoxRestauracaoActionPerformed(evt);
+                checkBoxRestauracaoActionPerformed(evt);
             }
         });
 
-        CheckBoxSaude.setText("Saúde");
+        checkBoxSaude.setText("Saúde");
 
-        CheckBoxEducacao.setText("Educação");
-        CheckBoxEducacao.addActionListener(new java.awt.event.ActionListener() {
+        checkBoxEducacao.setText("Educação");
+        checkBoxEducacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckBoxEducacaoActionPerformed(evt);
+                checkBoxEducacaoActionPerformed(evt);
             }
         });
 
-        CheckBoxHabitacao.setText("Habitação");
+        checkBoxHabitacao.setText("Habitação");
 
-        CheckBoxDespesasFamiliares.setText("Despesas Familiares");
+        checkBoxDespesasFamiliares.setText("Despesas Familiares");
 
         ButtonVoltar.setText("Voltar");
         ButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,12 +176,17 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
         });
 
         ButtonConfirmar.setText("Confirmar");
+        ButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("Fator que a empresa apresenta no cálculo de dedução fiscal:");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        textFieldFator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                textFieldFatorActionPerformed(evt);
             }
         });
 
@@ -188,8 +208,7 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                                 .addGap(440, 440, 440)
                                 .addComponent(ButtonVoltar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonConfirmar)
-                                .addGap(26, 26, 26))))
+                                .addComponent(ButtonConfirmar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel9))
@@ -199,13 +218,13 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CheckBoxRestauracao)
-                            .addComponent(CheckBoxEducacao, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CheckBoxSaude, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(checkBoxRestauracao)
+                            .addComponent(checkBoxEducacao, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkBoxSaude, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CheckBoxHabitacao)
-                            .addComponent(CheckBoxDespesasFamiliares)))
+                            .addComponent(checkBoxHabitacao)
+                            .addComponent(checkBoxDespesasFamiliares)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -217,23 +236,23 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                                     .addComponent(jLabel12))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextFieldNome, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                                    .addComponent(TextFieldEmail)
-                                    .addComponent(TextFieldMorada))
+                                    .addComponent(textFieldNome, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                                    .addComponent(textFieldEmail)
+                                    .addComponent(textFieldMorada))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel10))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(TextFieldNIF)))))
+                                    .addComponent(textFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(textFieldNIF)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27))
+                        .addComponent(textFieldFator, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +265,7 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ButtonVoltar)
                             .addComponent(ButtonConfirmar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -255,19 +274,19 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(TextFieldNIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldNIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(TextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextFieldMorada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldMorada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,96 +294,120 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CheckBoxRestauracao)
-                    .addComponent(CheckBoxHabitacao))
+                    .addComponent(checkBoxRestauracao)
+                    .addComponent(checkBoxHabitacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CheckBoxEducacao)
-                    .addComponent(CheckBoxDespesasFamiliares))
+                    .addComponent(checkBoxEducacao)
+                    .addComponent(checkBoxDespesasFamiliares))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CheckBoxSaude)
+                .addComponent(checkBoxSaude)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldFator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CheckBoxEducacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxEducacaoActionPerformed
+    private void checkBoxEducacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxEducacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CheckBoxEducacaoActionPerformed
+    }//GEN-LAST:event_checkBoxEducacaoActionPerformed
 
-    private void CheckBoxRestauracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxRestauracaoActionPerformed
+    private void checkBoxRestauracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxRestauracaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CheckBoxRestauracaoActionPerformed
+    }//GEN-LAST:event_checkBoxRestauracaoActionPerformed
 
     private void ButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonVoltarActionPerformed
-        // TODO add your handling code here:
+        this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+        (new Login(javaFactura)).setVisible(true);
     }//GEN-LAST:event_ButtonVoltarActionPerformed
 
-    private void TextFieldNIFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNIFActionPerformed
+    private void textFieldNIFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNIFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextFieldNIFActionPerformed
+    }//GEN-LAST:event_textFieldNIFActionPerformed
 
-    private void TextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNomeActionPerformed
+    private void textFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextFieldNomeActionPerformed
+    }//GEN-LAST:event_textFieldNomeActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void textFieldFatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldFatorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_textFieldFatorActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistarContribuinteColetivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistarContribuinteColetivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistarContribuinteColetivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistarContribuinteColetivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void ButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmarActionPerformed
+        Integer nif ;
+        
+        String email, nome, morada, password;
+        Float fatorEmpresarial;
+        List<Integer> atividades = new ArrayList<>();
+        try{
+            nif = Integer.parseInt(textFieldNIF.getText());
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistarContribuinteColetivo().setVisible(true);
+        catch(NumberFormatException e){
+            nif = new Integer(-1);
+        }
+        
+        try{
+            fatorEmpresarial = Float.parseFloat(textFieldFator.getText());
+        } catch(NumberFormatException e){
+            fatorEmpresarial = new Float(-1.0);
+        }
+        
+        if(nif <= 0){
+            //TODO: mostrar warning de nif n é número;
+            textFieldNIF.setText("");
+            System.out.println("NIF deve ser um número inteiro.");
+        } else if(fatorEmpresarial < 0){
+            //TODO: mostrar Warning de fator errado;
+            System.out.println("Factor não é float.");
+        } else if(!(email = textFieldEmail.getText()).contains("@")){
+            //TODO: mostrar warning email inválido
+            System.out.println("Email inválido");
+        } else{
+            nome = textFieldNome.getText();
+            morada = textFieldMorada.getText();
+            password = textFieldPassword.getText();
+            if(checkBoxRestauracao.isSelected())
+                atividades.add(CommonVariables.RESTAURACAO);
+            if(checkBoxEducacao.isSelected())
+                atividades.add(CommonVariables.EDUCACAO);
+            if(checkBoxSaude.isSelected())
+                atividades.add(CommonVariables.SAUDE);
+            if(checkBoxHabitacao.isSelected())
+                atividades.add(CommonVariables.HABITACAO);
+            if(checkBoxDespesasFamiliares.isSelected())
+                atividades.add(CommonVariables.DESPESAS_FAMILIARES);
+                
+            if(email.length() > 0 && nome.length() > 0 && morada.length() > 0 && password.length() > 0 && atividades.size() > 0){
+                javaFactura.registaContribuinteColetivo(nif,email,nome,morada,password,fatorEmpresarial,atividades);
+                this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+                returnPage.setVisible(true);  
+                System.out.println("Registado com sucesso");
             }
-        });
-    }
+            else{
+                //TODO: warning campos vazios.
+                System.out.println("Preencher campos vazios");
+            }
+      
+        }
+    }//GEN-LAST:event_ButtonConfirmarActionPerformed
+
+    private void textFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonConfirmar;
     private javax.swing.JButton ButtonVoltar;
-    private javax.swing.JCheckBox CheckBoxDespesasFamiliares;
-    private javax.swing.JCheckBox CheckBoxEducacao;
-    private javax.swing.JCheckBox CheckBoxHabitacao;
-    private javax.swing.JCheckBox CheckBoxRestauracao;
-    private javax.swing.JCheckBox CheckBoxSaude;
-    private javax.swing.JTextField TextFieldEmail;
-    private javax.swing.JTextField TextFieldMorada;
-    private javax.swing.JTextField TextFieldNIF;
-    private javax.swing.JTextField TextFieldNome;
-    private javax.swing.JTextField TextFieldPassword;
+    private javax.swing.JCheckBox checkBoxDespesasFamiliares;
+    private javax.swing.JCheckBox checkBoxEducacao;
+    private javax.swing.JCheckBox checkBoxHabitacao;
+    private javax.swing.JCheckBox checkBoxRestauracao;
+    private javax.swing.JCheckBox checkBoxSaude;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -391,6 +434,11 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField textFieldEmail;
+    private javax.swing.JTextField textFieldFator;
+    private javax.swing.JTextField textFieldMorada;
+    private javax.swing.JTextField textFieldNIF;
+    private javax.swing.JTextField textFieldNome;
+    private javax.swing.JTextField textFieldPassword;
     // End of variables declaration//GEN-END:variables
 }
