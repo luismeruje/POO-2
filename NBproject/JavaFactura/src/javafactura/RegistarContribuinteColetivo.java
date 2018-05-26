@@ -394,7 +394,7 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                 atividades.add(CommonVariables.DESPESAS_FAMILIARES);
                 
             if(email.length() > 0 && nome.length() > 0 && morada.length() > 0 && password.length() > 0 && atividades.size() > 0){
-                if(javaFactura.registaContribuinteColetivo(nif,email,nome,morada,password,fatorEmpresarial,atividades)){
+                if(javaFactura.registaContribuinteColetivo(nif,email,nome,morada,password,fatorEmpresarial,atividades,concelho)){
                     this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
                     returnPage.setVisible(true);
                     JOptionPane.showMessageDialog(this, "Registado com sucesso.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
