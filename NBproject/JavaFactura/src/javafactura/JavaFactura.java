@@ -154,28 +154,39 @@ public class JavaFactura implements Serializable
         return flag;
     }
     //Funcao que emite factura de uma empresa para um individuo
-    public void emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int tipoAtividade, int valorDesp){
-        int id = this.facturas.size();
-        int nifEmitente = emp.getNif();
-        float coefEmp = emp.getFactorEmpresarial();
-        String designacao = emp.getNome(); 
-        LocalDateTime dataDespesa = LocalDateTime.of(year,month,day,hour,minute);
-        int nifCliente = NIF;
-        String descricao = descricaoDesp;
-        int atividade;
-        float valorDeduzido;
-        float valor= valorDesp;
-        boolean confirmado=false;
-            if(emp.getAtividades().size()==1) {atividade = tipoAtividade;
-                valorDeduzido=getValorDeduzido(nifEmitente, atividade, valor, coefEmp, nifCliente); //fazerAlgoritmo
-            }
-            else {atividade = -1;
-                valorDeduzido = 0;
-            }
-        Factura f = new Factura(id,nifEmitente,designacao,dataDespesa,nifCliente, descricao, atividade,
-                                valor, confirmado, valorDeduzido);
-    
-    this.facturas.put(id,f);
+    public ContribuinteColetivo emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int valorDesp){
+        if (this.contribuintes.containsKey(NIF) && (this.contribuintes.get(NIF) instanceof ContribuinteIndividual)){ 
+            int id = this.facturas.size();
+            int nifEmitente = emp.getNif();
+            float coefEmp = emp.getFactorEmpresarial();
+            String designacao = emp.getNome(); 
+            LocalDateTime dataDespesa = LocalDateTime.of(year,month,day,hour,minute);
+            int nifCliente = NIF;
+            String descricao = descricaoDesp;
+            int atividade;
+            float valorDeduzido;
+            float valor= valorDesp;
+            boolean confirmado=false;
+            List<Integer> atividadesemp = emp.getAtividades();
+                if(atividadesemp.size()==1) {atividade = atividadesemp.get(0) ;
+                    valorDeduzido=getValorDeduzido(nifEmitente, atividade, valor, coefEmp, nifCliente); //fazerAlgoritmo
+                }
+                else {atividade = -1;
+                    valorDeduzido = 0;
+                }
+            Factura f = new Factura(id,nifEmitente,designacao,dataDespesa,nifCliente, descricao, atividade,
+                                    valor, confirmado, valorDeduzido);
+
+
+            ContribuinteColetivo newEmp= (ContribuinteColetivo) this.contribuintes.get(nifEmitente);
+            this.facturas.put(id,f);
+            List<Integer> facturasci = this.contribuintes.get(nifCliente).getFacturas();
+            List<Integer> facturascc = this.contribuintes.get(nifEmitente).getFacturas();
+            facturasci.add(f.getId());
+            facturascc.add(f.getId());
+            return newEmp.clone(); 
+        }
+        else return null;
     }
     
     public float getValorDeduzidoAnual(int nifC){
