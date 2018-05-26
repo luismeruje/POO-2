@@ -18,11 +18,7 @@ public class JavaFactura
     private Admin admin;
     private Map<Integer,Float> coefs;
     private Contribuinte contribuinteAt = null;
-    private static final int RESTAURACAO = 1;
-    private static final int EDUCACAO = 2;
-    private static final int SAUDE = 3;
-    private static final int HABITACAO = 4;
-    private static final int DESPESAS_FAMILIARES = 5;
+    
 
     public JavaFactura(Admin admin)
     {
@@ -290,4 +286,17 @@ public class JavaFactura
              faturado += f.getValor();
          return faturado;
      }
+      
+      public List<Contribuinte> getTop10Contribuintes(){
+          Map<Contribuinte,Float> topContribuintes= new HashMap<Contribuinte,Float>();
+          float contribuicao=0;
+          Contribuinte l = null;
+          for (Contribuinte c: this.contribuintes){
+              l = c;
+              contribuicao=this.getValorDeduzidoAnual(l.getNif());
+              topContribuintes.put(l, contribuicao);
+          }
+          TreeMap = new TreeSet<String>(topContribuintes.values());
+          return topContribuintes;
+      }
 }

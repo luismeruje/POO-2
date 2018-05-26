@@ -14,14 +14,13 @@ public class ContribuinteColetivo extends Contribuinte
     // instance variables - replace the example below with your own
     private List<Integer> atividades;
     private float factorEmpresarial;
-    private String designacao;
     
 
-    public ContribuinteColetivo(float factorEmpresarial, String designacao, int nif, String email, String nome, String morada, String password) {
+    public ContribuinteColetivo(float factorEmpresarial, int nif, String email, String nome, String morada, String password) {
         super(nif, email, nome, morada, password);
         this.atividades = new ArrayList<Integer>();
         this.factorEmpresarial = factorEmpresarial;
-        this.designacao= designacao;
+       ;
     }
     
     public ContribuinteColetivo(ContribuinteColetivo emp){
@@ -56,13 +55,7 @@ public class ContribuinteColetivo extends Contribuinte
         this.factorEmpresarial = factorEmpresarial;
     }
 
-    public String getDesignacao() {
-        return designacao;
-    }
-
-    public void setDesignacao(String designacao) {
-        this.designacao = designacao;
-    }
+    
     
     
     
