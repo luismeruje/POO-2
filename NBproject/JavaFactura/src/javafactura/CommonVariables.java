@@ -5,6 +5,8 @@
  */
 package javafactura;
 
+import java.io.Serializable;
+
 /**
  *
  * @author treishy
@@ -15,6 +17,4 @@ public class CommonVariables {
     public static final int SAUDE = 3;
     public static final int HABITACAO = 4;
     public static final int DESPESAS_FAMILIARES = 5;
-    
-    
 }
