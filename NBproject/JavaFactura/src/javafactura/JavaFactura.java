@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 /**
  * Write a description of class JavaFactura here.
  *
@@ -190,7 +192,7 @@ public class JavaFactura
      }
      
      
-     public boolean registaIndividuo( int nif,String email,String nome,String morada,String password,List<Integer> nifAgregado,float coefFiscal, List<Integer> atividades){
+     public boolean registaContribuinteIndividual( int nif,String email,String nome,String morada,String password,List<Integer> nifAgregado,float coefFiscal, List<Integer> atividades){
          boolean registado=false;
          Iterator it = this.contribuintes.listIterator();
          Contribuinte c;
@@ -215,7 +217,7 @@ public class JavaFactura
          return registado;
      }
      
-     public boolean registaEmpresa( int nif,String email,String nome,String morada,String password,String designacao,float factorEmpresarial, List<Integer> atividades){
+     public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,String designacao,float factorEmpresarial, List<Integer> atividades){
          boolean registado=false;
          Iterator it = this.contribuintes.listIterator();
          Contribuinte c;
@@ -296,7 +298,9 @@ public class JavaFactura
               contribuicao=this.getValorDeduzidoAnual(l.getNif());
               topContribuintes.put(l, contribuicao);
           }
-          TreeMap = new TreeSet<String>(topContribuintes.values());
-          return topContribuintes;
+          HashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
+                                                             .sorted(Entry.comparingByValue())
+                                                             .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
+          return topContribuintesOrdenado.entrySet().stream().limit(10).collect(Collectors.toList());
       }
 }
