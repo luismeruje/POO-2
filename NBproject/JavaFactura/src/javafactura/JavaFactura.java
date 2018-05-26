@@ -243,5 +243,28 @@ public class JavaFactura
          }
          return deduzido;
      }
-   
+     
+     public List<Factura> getFacturasEmpresaOrdenadaPorData(int NIF){
+         List<Factura> facturas = getFacturasWithNIF(NIF);
+         Collections.sort(facturas,new ComparatorFacturasData());
+         return facturas;
+     }
+     public List<Factura> getFacturasEmpresaOrdenadaPorDespesa(int NIF, boolean ascendente){
+         List<Factura> facturas = getFacturasWithNIF(NIF);
+         Collections.sort(facturas,new ComparatorFacturasValor());
+         
+         
+         if (!ascendente)
+             Collections.reverse(facturas);
+         return facturas;
+     }
+     
+     public List<Factura> getFacturasEmpresaEntreDatas(int NIF, LocalDateTime dataMenor, LocalDateTime dataMaior){
+        List<Factura> facc = new ArrayList<Factura>();
+       facturas.stream().filter((f) -> ((f.getNifEmitente() == NIF ) && (f.getDataDespesa().compareTo(dataMenor) == 1) && (f.getDataDespesa().compareTo(dataMaior) == -1)))
+               .forEach((f) -> {
+                    facc.add(f);
+                });
+       return facc;
+     }
 }
