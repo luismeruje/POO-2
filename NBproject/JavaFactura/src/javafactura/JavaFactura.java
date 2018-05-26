@@ -79,19 +79,21 @@ public class JavaFactura
     }
     
     //Devolve se conta foi encontrada ou nao
-    public boolean login(String NIF,String Password){
+    public Contribuinte login(String NIF,String Password){
         int nifC;
         boolean encontrado=false;
+        Contribuinte logado = null;
         nifC= Integer.valueOf(NIF);
         for(Contribuinte c: this.contribuintes){
             if(c.getNif()==nifC){
                 if(c.getPassword().equals(Password))
                     encontrado=true;
+                    logado=c;
                 break;
             } 
                 
         }
-        return encontrado;
+        return logado;
     }
 
     
