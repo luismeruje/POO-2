@@ -209,10 +209,10 @@ public class JavaFactura implements Serializable
      
      
      public boolean registaContribuinteIndividual( int nif,String email,String nome,String morada,String password,List<Integer> nifAgregado,float coefFiscal, List<Integer> atividades, int nrfilhos){
-         boolean registado=false;
+         boolean notRegistado=false;
         
          ContribuinteIndividual ind;
-         if (registado = !this.contribuintes.containsKey(nif)){
+         if (notRegistado = !this.contribuintes.containsKey(nif)){
             ind = new ContribuinteIndividual(coefFiscal, nif, email, nome,morada, password, nrfilhos);
 
             List <Integer> agregado = ind.getAgregadoFamiliar();
@@ -225,14 +225,14 @@ public class JavaFactura implements Serializable
             } 
             this.contribuintes.put(nif,ind);
          }
-         return registado;
+         return notRegistado;
      }
      
      public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,float factorEmpresarial, List<Integer> atividades){
-         boolean registado=false;
+         boolean notRegistado=false;
          
          ContribuinteColetivo emp;
-         if (registado = !this.contribuintes.containsKey(nif)){
+         if (notRegistado = !this.contribuintes.containsKey(nif)){
             emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome,morada, password);
 
             List <Integer> atividade = emp.getAtividades();
@@ -241,7 +241,7 @@ public class JavaFactura implements Serializable
             } 
             this.contribuintes.put(nif,emp);
          }
-         return registado;
+         return notRegistado;
      }
      
      public float getDeduzidoAgregado(ContribuinteIndividual ind){
