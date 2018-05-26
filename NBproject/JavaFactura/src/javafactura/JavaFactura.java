@@ -154,7 +154,7 @@ public class JavaFactura implements Serializable
         return flag;
     }
     //Funcao que emite factura de uma empresa para um individuo
-    public ContribuinteColetivo emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int valorDesp){
+    public ContribuinteColetivo emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, float valorDesp){
         if (this.contribuintes.containsKey(NIF) && (this.contribuintes.get(NIF) instanceof ContribuinteIndividual)){ 
             int id = this.facturas.size();
             int nifEmitente = emp.getNif();
