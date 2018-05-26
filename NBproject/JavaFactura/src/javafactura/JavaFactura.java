@@ -22,9 +22,9 @@ public class JavaFactura
     private Contribuinte contribuinteAt = null;
     
 
-    public JavaFactura(Admin admin)
+    public JavaFactura()
     {
-    this.admin = admin;
+    this.admin = null;
     this.contribuintes = new ArrayList<Contribuinte>();
     this.facturas = new ArrayList<Factura>();
     this.coefs = new HashMap<Integer,Float>();
@@ -301,6 +301,7 @@ public class JavaFactura
           HashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
                                                              .sorted(Entry.comparingByValue())
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
-          return topContribuintesOrdenado.entrySet().stream().limit(10).collect(Collectors.toList());
+          
+          return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(10).collect(Collectors.toList());
       }
 }
