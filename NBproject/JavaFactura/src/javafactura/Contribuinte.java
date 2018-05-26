@@ -1,6 +1,8 @@
 package javafactura;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Write a description of class Contribuinte here.
@@ -15,6 +17,7 @@ public class Contribuinte implements Serializable
     private String nome;
     private String morada;
     private String password;
+    private List<Integer> facturas;
    
     public Contribuinte(int nif, String email, String nome, String morada, String password){
         this.nif = nif;
@@ -22,6 +25,7 @@ public class Contribuinte implements Serializable
         this.nome = nome;
         this.morada = morada;
         this.password = password;
+        this.facturas = new ArrayList<Integer>();
         
     }
     
@@ -32,7 +36,15 @@ public class Contribuinte implements Serializable
         this.morada = c.getMorada();
         this.password = c.getPassword();
     }
-
+    
+    public List<Integer> getFacturas(){
+        return this.facturas;
+    }
+    
+    public void setFacturas(List<Integer> facturas){
+        this.facturas= facturas;
+    }
+    
     public int getNif() {
         return nif;
     }

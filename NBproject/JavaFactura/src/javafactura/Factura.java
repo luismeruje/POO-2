@@ -10,7 +10,7 @@ import java.util.*;
 import java.time.LocalDateTime;
 public class Factura implements Serializable
 {
-    private String id;
+    private int id;
     private int nifEmitente;
     private String designacao; 
     private LocalDateTime dataDespesa;
@@ -22,7 +22,7 @@ public class Factura implements Serializable
     private float valorDeduzido; //TODO
     private List<Registo> registos;
 
-    public Factura(String id, int nifEmitente, String designacao, LocalDateTime dataDespesa, int nifCliente, String descricao, int atividade, float valor, boolean confirmado, float valorDeduzido) {
+    public Factura(int id, int nifEmitente, String designacao, LocalDateTime dataDespesa, int nifCliente, String descricao, int atividade, float valor, boolean confirmado, float valorDeduzido) {
         this.id = id;
         this.nifEmitente = nifEmitente;
         this.designacao = designacao;
@@ -55,11 +55,11 @@ public class Factura implements Serializable
     public void setRegistos(List<Registo> registos){
         this.registos=registos;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -163,7 +163,7 @@ public class Factura implements Serializable
         if ((o==null) || (this.getClass() != o.getClass())) 
             return false;
         Factura fac = (Factura) o;
-        return (this.id.equals(fac.getId()) && this.nifEmitente == fac.getNifEmitente() 
+        return (this.id==fac.getId() && this.nifEmitente == fac.getNifEmitente() 
                 && this.designacao.equals(fac.getDesignacao()) && this.dataDespesa.equals(fac.getDataDespesa())
                 && this.nifCliente == fac.getNifCliente() && this.descricao.equals(fac.getDescricao())
                 && this.atividade == fac.getAtividade() && this.valor == fac.getValor()

@@ -12,16 +12,18 @@ import java.util.List;
 public class ContribuinteIndividual extends Contribuinte
 {
     // instance variables - replace the example below with your own
-    private List<Integer> nifAgregado;
+    private List<Integer> nifAgregado; //nifFilhos
+    private int nrFilhos;
     private float coefFiscal;
     private List<Integer> atividades;
 
     
-    public ContribuinteIndividual(float coefFiscal,int nif, String email, String nome, String morada, String password) {
+    public ContribuinteIndividual(float coefFiscal,int nif, String email, String nome, String morada, String password, int nrFilhos) {
         super(nif, email, nome, morada, password);
         this.nifAgregado = new ArrayList<>();
         this.coefFiscal = coefFiscal;
         this.atividades = new ArrayList<>();
+        this.nrFilhos=nrFilhos;
     }
     
     public ContribuinteIndividual(ContribuinteIndividual i){

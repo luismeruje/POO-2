@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 
 public class JavaFactura implements Serializable
 {
-    private List<Contribuinte> contribuintes;
-    private List<Factura> facturas;
+    private Map<Integer,Contribuinte> contribuintes;
+    private Map<Integer,Factura> facturas;
     private Admin admin;
     private Map<Integer,Float> coefs;
     private Contribuinte contribuinteAt = null;
@@ -32,8 +32,8 @@ public class JavaFactura implements Serializable
     public JavaFactura()
     {
     this.admin = null;
-    this.contribuintes = new ArrayList<Contribuinte>();
-    this.facturas = new ArrayList<Factura>();
+    this.contribuintes = new HashMap<Integer,Contribuinte>();
+    this.facturas = new HashMap<Integer,Factura>();
     this.coefs = new HashMap<Integer,Float>();
     }
     
@@ -53,19 +53,19 @@ public class JavaFactura implements Serializable
     }
     
     
-    public List<Contribuinte> getContribuintes()  {
+    public Map<Integer,Contribuinte> getContribuintes()  {
         return this.contribuintes;
     }
     
-    public void setContribuintes(List<Factura> contribuinte){
-        this.facturas = contribuinte;
+    public void setContribuintes(Map<Integer,Contribuinte> contribuinte){
+        this.contribuintes = contribuinte;
     }
     
-    public List<Factura> getFacturas()  {
+    public Map<Integer,Factura> getFacturas()  {
         return this.facturas;
     }
     
-    public void setFactura(List<Factura> factura){
+    public void setFactura(Map<Integer,Factura> factura){
         this.facturas = factura;
     }
     public Map<Integer,Float> getCoefs() {
@@ -84,20 +84,17 @@ public class JavaFactura implements Serializable
     }
     
     //Devolve se conta foi encontrada ou nao
-    public Contribuinte login(String NIF,String Password){
-        int nifC;
+    public Contribuinte login(int nifC,String Password){
         boolean encontrado=false;
         Contribuinte logado = null;
-        nifC= Integer.valueOf(NIF);
-        for(Contribuinte c: this.contribuintes){
-            if(c.getNif()==nifC){
-                if(c.getPassword().equals(Password))
-                    encontrado=true;
-                    logado=c;
-                break;
-            } 
-                
+        Contribuinte c;
+        if (this.contribuintes.containsKey(nifC)){
+            c= this.contribuintes.get(nifC);
+            if(c.getPassword().equals(Password)){
+                logado=c;
+            }
         }
+            
         return logado;
     }
 
@@ -105,17 +102,29 @@ public class JavaFactura implements Serializable
     //Procura todas as faturas com o NIF do Contribuinte
     public List<Factura> getFacturasWithNIF(int NIF){
        List<Factura> facc = new ArrayList<Factura>();
+       List<Integer> faccids = this.contribuintes.get(NIF).getFacturas();
+       Factura f;
+       for(int i: faccids){
+           f = this.facturas.get(i);
+           facc.add(f);
+       }
+       /*
        facturas.stream().filter((f) -> (f.getNifCliente() == NIF || f.getNifEmitente() == NIF )).forEach((f) -> {
            facc.add(f);
         });
+        */
        return facc;
     }
     //Facturas para Validar Movimento
     public List<Factura> getFacturasPorConfirmar(int NIF){
        List<Factura> facc = new ArrayList<Factura>();
-       facturas.stream().filter((f) -> (f.getNifCliente() == NIF && !f.getConfirmado())).forEach((f) -> {
-           facc.add(f);
-        });
+       List<Integer> faccids = this.contribuintes.get(NIF).getFacturas();
+       Factura f;
+       for(int i: faccids){
+           f = this.facturas.get(i);
+           if (!f.getConfirmado())
+              facc.add(f);
+       }
        return facc;
     }
     
@@ -125,7 +134,7 @@ public class JavaFactura implements Serializable
     
     //Funcao que emite factura de uma empresa para um individuo
     public void emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int tipoAtividade, int valorDesp){
-        String id = String.valueOf(this.facturas.size());
+        int id = this.facturas.size();
         int nifEmitente = emp.getNif();
         float coefEmp = emp.getFactorEmpresarial();
         String designacao = emp.getNome(); 
@@ -145,7 +154,7 @@ public class JavaFactura implements Serializable
         Factura f = new Factura(id,nifEmitente,designacao,dataDespesa,nifCliente, descricao, atividade,
                                 valor, confirmado, valorDeduzido);
     
-    this.facturas.add(f);
+    this.facturas.put(id,f);
     }
     
     public float getValorDeduzidoAnual(int nifC){
@@ -167,13 +176,13 @@ public class JavaFactura implements Serializable
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Contribuintes:\n");
-        for(Contribuinte cont: this.contribuintes){
+        for(Contribuinte cont: this.contribuintes.values()){
             sb.append(cont.toString());
             sb.append("\n");
         }
         sb.append("Admin :\n"); sb.append(admin.toString());
         sb.append("Facturas:\n");
-        for(Factura fac: this.facturas){
+        for(Factura fac: this.facturas.values()){
             sb.append(fac.toString());
             sb.append("\n");
         }
@@ -199,17 +208,12 @@ public class JavaFactura implements Serializable
      }
      
      
-     public boolean registaContribuinteIndividual( int nif,String email,String nome,String morada,String password,List<Integer> nifAgregado,float coefFiscal, List<Integer> atividades){
+     public boolean registaContribuinteIndividual( int nif,String email,String nome,String morada,String password,List<Integer> nifAgregado,float coefFiscal, List<Integer> atividades, int nrfilhos){
          boolean registado=false;
-         Iterator it = this.contribuintes.listIterator();
-         Contribuinte c;
-         while(it.hasNext() && !registado){
-             c= (Contribuinte) it.next();
-             if (c.getNif() == nif) registado = true; 
-         }
+        
          ContribuinteIndividual ind;
-         if (!registado){
-            ind = new ContribuinteIndividual(coefFiscal, nif, email, nome,morada, password);
+         if (registado = !this.contribuintes.containsKey(nif)){
+            ind = new ContribuinteIndividual(coefFiscal, nif, email, nome,morada, password, nrfilhos);
 
             List <Integer> agregado = ind.getAgregadoFamiliar();
             List <Integer> atividade = ind.getAtividades();
@@ -219,28 +223,23 @@ public class JavaFactura implements Serializable
             for(Integer i: atividades){
                 atividade.add(i);
             } 
-            this.contribuintes.add(ind);
+            this.contribuintes.put(nif,ind);
          }
          return registado;
      }
      
      public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,float factorEmpresarial, List<Integer> atividades){
          boolean registado=false;
-         Iterator it = this.contribuintes.listIterator();
-         Contribuinte c;
-         while(it.hasNext() && !registado){
-             c= (Contribuinte) it.next();
-             if (c.getNif() == nif) registado = true; 
-         }
+         
          ContribuinteColetivo emp;
-         if (!registado){
+         if (registado = !this.contribuintes.containsKey(nif)){
             emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome,morada, password);
 
             List <Integer> atividade = emp.getAtividades();
             for(Integer i: atividades){
                 atividade.add(i);
             } 
-            this.contribuintes.add(emp);
+            this.contribuintes.put(nif,emp);
          }
          return registado;
      }
@@ -261,6 +260,7 @@ public class JavaFactura implements Serializable
          Collections.sort(facturas,new ComparatorFacturasData());
          return facturas;
      }
+     
      public List<Factura> getFacturasEmpresaOrdenadaPorDespesa(int NIF, boolean ascendente){
          List<Factura> facturas = getFacturasWithNIF(NIF);
          Collections.sort(facturas,new ComparatorFacturasValor());
@@ -272,11 +272,15 @@ public class JavaFactura implements Serializable
      }
      
      public List<Factura> getFacturasEmpresaEntreDatas(int NIF, LocalDateTime dataMenor, LocalDateTime dataMaior){
-        List<Factura> facc = new ArrayList<Factura>();
-       facturas.stream().filter((f) -> ((f.getNifEmitente() == NIF ) && (f.getDataDespesa().compareTo(dataMenor) == 1) && (f.getDataDespesa().compareTo(dataMaior) == -1)))
-               .forEach((f) -> {
-                    facc.add(f);
-                });
+       List<Factura> facc = new ArrayList<Factura>();
+       Contribuinte emp = this.contribuintes.get(NIF);       
+       List<Integer> faccids = this.contribuintes.get(NIF).getFacturas();
+       Factura f;
+       for(int i: faccids){
+           f = this.facturas.get(i);
+           if ((f.getDataDespesa().compareTo(dataMenor) == 1) && (f.getDataDespesa().compareTo(dataMaior) == -1))
+              facc.add(f);
+       }
        return facc;
      }
      
@@ -300,7 +304,7 @@ public class JavaFactura implements Serializable
           Map<Contribuinte,Float> topContribuintes= new HashMap<Contribuinte,Float>();
           float contribuicao=0;
           Contribuinte l = null;
-          for (Contribuinte c: this.contribuintes){
+          for (Contribuinte c: this.contribuintes.values()){
               l = c;
               contribuicao=this.getValorDeduzidoAnual(l.getNif());
               topContribuintes.put(l, contribuicao);
@@ -317,7 +321,7 @@ public class JavaFactura implements Serializable
           int facturasCount=0;
           List<Factura> facturas;
           Contribuinte l = null;
-          for (Contribuinte c: this.contribuintes){
+          for (Contribuinte c: this.contribuintes.values()){
               if (c instanceof ContribuinteColetivo){
               l = c.clone();
               facturas=this.getFacturasWithNIF(l.getNif());
