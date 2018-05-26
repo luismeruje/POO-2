@@ -1,13 +1,14 @@
 
 package javafactura;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author treishy
  */
-public class Registo {
+public class Registo implements Serializable {
     private String descricao;
     private int oldValue;
     private int newValue;

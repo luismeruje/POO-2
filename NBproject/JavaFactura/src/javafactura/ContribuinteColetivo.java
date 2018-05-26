@@ -1,5 +1,6 @@
 package javafactura;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ContribuinteColetivo extends Contribuinte
+public class ContribuinteColetivo extends Contribuinte implements Serializable
 {
     // instance variables - replace the example below with your own
     private List<Integer> atividades;

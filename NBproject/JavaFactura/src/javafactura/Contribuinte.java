@@ -1,11 +1,14 @@
 package javafactura;
+
+import java.io.Serializable;
+
 /**
  * Write a description of class Contribuinte here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Contribuinte
+public class Contribuinte implements Serializable
 {
     int nif;
     private String email;

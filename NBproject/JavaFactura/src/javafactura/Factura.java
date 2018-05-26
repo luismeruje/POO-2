@@ -5,9 +5,10 @@ package javafactura;
  * @author (your name)
  * @version (a version number or a date)
  */
+import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDateTime;
-public class Factura
+public class Factura implements Serializable
 {
     private String id;
     private int nifEmitente;

@@ -1,5 +1,12 @@
 package javafactura;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,7 +20,7 @@ import java.util.stream.Collectors;
  * @version (a version number or a date)
  */
 
-public class JavaFactura
+public class JavaFactura implements Serializable
 {
     private List<Contribuinte> contribuintes;
     private List<Factura> facturas;
@@ -303,5 +310,21 @@ public class JavaFactura
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
           
           return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(10).collect(Collectors.toList());
+      }
+      
+      public void guardaEstado(String filename) throws FileNotFoundException, IOException{
+          FileOutputStream fos= new FileOutputStream(filename);
+          ObjectOutputStream oos= new ObjectOutputStream(fos);
+          oos.writeObject(this);
+          oos.flush();
+          oos.close();
+      }
+      
+      public static JavaFactura carregaEstado(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+          FileInputStream fis= new FileInputStream(filename);
+          ObjectInputStream ois = new ObjectInputStream(fis);
+          JavaFactura jf = (JavaFactura) ois.readObject();
+          ois.close();
+          return jf;
       }
 }
