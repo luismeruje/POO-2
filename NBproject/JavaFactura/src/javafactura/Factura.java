@@ -19,6 +19,7 @@ public class Factura
     private float valor;
     private boolean confirmado;
     private float valorDeduzido; //TODO
+    private List<Registo> registos;
 
     public Factura(String id, int nifEmitente, String designacao, LocalDateTime dataDespesa, int nifCliente, String descricao, int atividade, float valor, boolean confirmado, float valorDeduzido) {
         this.id = id;
@@ -45,7 +46,14 @@ public class Factura
         this.confirmado = f.getConfirmado(); 
         this.valorDeduzido = f.getValorDeduzido();
     }
-
+    
+    public List<Registo> getRegistos(){
+        return this.registos;
+    }
+    
+    public void setRegistos(List<Registo> registos){
+        this.registos=registos;
+    }
     public String getId() {
         return id;
     }

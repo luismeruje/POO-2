@@ -1,6 +1,8 @@
 
 package javafactura;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author treishy
@@ -9,11 +11,21 @@ public class Registo {
     private String descricao;
     private int oldValue;
     private int newValue;
+    private LocalDateTime dataAlteracao;
 
     public Registo(String descricao, int oldValue, int newValue) {
         this.descricao = descricao;
         this.oldValue = oldValue;
         this.newValue = newValue;
+        this.dataAlteracao = LocalDateTime.now();
+    }
+
+    public LocalDateTime getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
     }
     
 
