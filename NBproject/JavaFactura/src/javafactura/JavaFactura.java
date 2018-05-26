@@ -124,6 +124,28 @@ public class JavaFactura implements Serializable
         */
        return facc;
     }
+    
+    public Map<Integer,Float> getDespesasPorAtividade(int NIF){
+        List<Factura> facc = getFacturasWithNIF(NIF);
+        Map<Integer,Float> despesasAtiv = new HashMap<>();
+        List<Integer> faccids = this.contribuintes.get(NIF).getFacturas();
+        Factura f;
+        int atividade;
+        float valor, valorAntigo;
+        for(int i: faccids){
+           f = this.facturas.get(i);
+           atividade= f.getAtividade();
+           valor = f.getValor();
+           if(despesasAtiv.containsKey(atividade))
+               valorAntigo=despesasAtiv.get(atividade);
+           else
+               valorAntigo=0;
+           despesasAtiv.put(atividade,valor + valorAntigo);
+       }
+        return despesasAtiv;
+    }
+         
+    
     //Facturas para Validar Movimento
     public List<Factura> getFacturasPorConfirmar(int NIF){
        List<Factura> facc = new ArrayList<Factura>();
