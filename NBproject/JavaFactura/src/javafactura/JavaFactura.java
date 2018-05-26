@@ -185,5 +185,54 @@ public class JavaFactura
      public JavaFactura clone(){
          return new JavaFactura(this);
      }
+     
+     
+     public boolean registaIndividuo( int nif,String email,String nome,String morada,String password,List<Integer> nifAgregado,float coefFiscal, List<Integer> atividades){
+         boolean registado=false;
+         Iterator it = this.contribuintes.listIterator();
+         Contribuinte c;
+         while(it.hasNext() && !registado){
+             c= (Contribuinte) it.next();
+             if (c.getNif() == nif) registado = true; 
+         }
+         Individuo ind;
+         if (!registado){
+            ind = new Individuo(coefFiscal, nif, email, nome,morada, password);
+
+            List <Integer> agregado = ind.getAgregadoFamiliar();
+            List <Integer> atividade = ind.getAtividades();
+            for(Integer i: nifAgregado){
+                agregado.add(i);
+            }
+            for(Integer i: atividades){
+                atividade.add(i);
+            } 
+            this.contribuintes.add(ind);
+         }
+         return registado;
+     }
+     
+     public boolean registaEmpresa( int nif,String email,String nome,String morada,String password,String designacao,float factorEmpresarial, List<Integer> atividades){
+         boolean registado=false;
+         Iterator it = this.contribuintes.listIterator();
+         Contribuinte c;
+         while(it.hasNext() && !registado){
+             c= (Contribuinte) it.next();
+             if (c.getNif() == nif) registado = true; 
+         }
+         Empresa emp;
+         if (!registado){
+            emp = new Empresa(factorEmpresarial,designacao, nif, email, nome,morada, password);
+
+            List <Integer> atividade = emp.getAtividades();
+            for(Integer i: atividades){
+                atividade.add(i);
+            } 
+            this.contribuintes.add(emp);
+         }
+         return registado;
+     }
+     
+     
    
 }

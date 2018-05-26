@@ -17,10 +17,11 @@ public class Empresa extends Contribuinte
     private String designacao;
     
 
-    public Empresa(float factorEmpresarial, int nif, String email, String nome, String morada, String password) {
+    public Empresa(float factorEmpresarial, String designacao, int nif, String email, String nome, String morada, String password) {
         super(nif, email, nome, morada, password);
         this.atividades = new ArrayList<Integer>();
         this.factorEmpresarial = factorEmpresarial;
+        this.designacao= designacao;
     }
     
     public Empresa(Empresa emp){
