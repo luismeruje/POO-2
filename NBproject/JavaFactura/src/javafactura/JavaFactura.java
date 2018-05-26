@@ -312,6 +312,38 @@ public class JavaFactura implements Serializable
           return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(10).collect(Collectors.toList());
       }
       
+      public List<Contribuinte> getTopXEmpresasComMaisFacturas(int x){
+          Map<Contribuinte,Integer> topEmpresas= new HashMap<Contribuinte,Integer>();
+          int facturasCount=0;
+          List<Factura> facturas;
+          Contribuinte l = null;
+          for (Contribuinte c: this.contribuintes){
+              if (c instanceof ContribuinteColetivo){
+              l = c.clone();
+              facturas=this.getFacturasWithNIF(l.getNif());
+              facturasCount += facturas.size();
+              topEmpresas.put(l, facturasCount);
+              }
+          }
+          HashMap<Contribuinte,Integer> topContribuintesOrdenado = topEmpresas.entrySet().stream()
+                                                             .sorted(Entry.comparingByValue())
+                                                             .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
+          
+          return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(x).collect(Collectors.toList());
+      }
+       // verificar se esta por ordem esta...
+      public Map<Contribuinte,Float>getTopXEmpresasFaturadoras(int x){
+          List<Contribuinte> topxEmpresas= this.getTopXEmpresasComMaisFacturas(x);
+          Contribuinte l;
+          Map<Contribuinte,Float> topEmpresas = new HashMap<Contribuinte,Float>();
+          for(Contribuinte c: topxEmpresas){
+              l=c.clone();
+              float deducoes= this.getValorDeduzidoAnual(l.getNif());
+              topEmpresas.put(l, deducoes);
+          }
+          return topEmpresas;
+      }
+      
       public void guardaEstado(String filename) throws FileNotFoundException, IOException{
           FileOutputStream fos= new FileOutputStream(filename);
           ObjectOutputStream oos= new ObjectOutputStream(fos);
