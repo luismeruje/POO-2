@@ -17,7 +17,7 @@ public class JavaFactura
     private List<Factura> facturas;
     private Admin admin;
     private Map<Integer,Float> coefs;
-
+    
    
     public JavaFactura(Admin admin)
     {
@@ -233,6 +233,15 @@ public class JavaFactura
          return registado;
      }
      
-     
+     public float getDeduzidoAgregado(Individuo ind){
+         int nif = ind.getNif();
+         List<Integer> agregado = ind.getAgregadoFamiliar();
+         float deduzido=0;
+         deduzido += this.getValorDeduzidoAnual(nif);
+         for (Integer i: agregado){
+             deduzido += getValorDeduzidoAnual(i);
+         }
+         return deduzido;
+     }
    
 }
