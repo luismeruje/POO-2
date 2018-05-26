@@ -141,6 +141,18 @@ public class JavaFactura implements Serializable
         f.setConfirmado(true);
     }
     
+    public boolean associarFacturaAtividade(Factura f, int atividade){
+        boolean flag = false;
+        int nifE= f.getNifEmitente();
+        ContribuinteColetivo cc = (ContribuinteColetivo) this.contribuintes.get(nifE);
+        List<Integer> atividades = cc.getAtividades();
+        if(atividades.contains(atividade)){
+            flag = true;
+            f.setAtividade(atividade);
+            f.setValorDeduzido(getValorDeduzido(nifE, atividade, f.getValor(), cc.getFactorEmpresarial(), f.getNifCliente()));
+        }
+        return flag;
+    }
     //Funcao que emite factura de uma empresa para um individuo
     public void emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int tipoAtividade, int valorDesp){
         int id = this.facturas.size();
@@ -158,7 +170,7 @@ public class JavaFactura implements Serializable
                 valorDeduzido=getValorDeduzido(nifEmitente, atividade, valor, coefEmp, nifCliente); //fazerAlgoritmo
             }
             else {atividade = -1;
-                valorDeduzido=0;
+                valorDeduzido = 0;
             }
         Factura f = new Factura(id,nifEmitente,designacao,dataDespesa,nifCliente, descricao, atividade,
                                 valor, confirmado, valorDeduzido);
