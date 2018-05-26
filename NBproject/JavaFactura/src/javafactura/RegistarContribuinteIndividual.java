@@ -429,7 +429,7 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
                 //TODO:Warning nrFilhos > nr nif's do agregado registados
                 System.out.printf("Nr filhos demasiado alto");
             } else if(email.length() > 0 && nome.length() > 0 && morada.length() > 0 && password.length() > 0 && atividades.size() > 0){
-                javaFactura.registaContribuinteIndividual(nif,email,nome,morada,password,nifAgregado,fatorEmpresarial,atividades);
+                javaFactura.registaContribuinteIndividual(nif,email,nome,morada,password,nifAgregado,fatorEmpresarial,atividades,nrFilhos);
                 this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
                 returnPage.setVisible(true);  
                 System.out.println("Registado com sucesso");
