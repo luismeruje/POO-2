@@ -6,6 +6,7 @@
 package javafactura;
 
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,19 +49,19 @@ public class AdicionarFatura extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextFieldData = new javax.swing.JTextField();
+        jTextFieldDia = new javax.swing.JTextField();
         jTextFieldNIFCliente = new javax.swing.JTextField();
         jTextFieldValorDespesa = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPaneDescricao = new javax.swing.JEditorPane();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldHora = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextFieldData1 = new javax.swing.JTextField();
+        jTextFieldMes = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldAno = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextFieldHora1 = new javax.swing.JTextField();
+        jTextFieldMinuto = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaDescricao = new javax.swing.JTextArea();
 
         jSeparator2.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
@@ -106,13 +107,11 @@ public class AdicionarFatura extends javax.swing.JFrame {
 
         jLabel8.setText("Valor da despesa:");
 
-        jTextFieldData.setText("DD");
-
-        jScrollPane1.setViewportView(jEditorPaneDescricao);
+        jTextFieldDia.setText("DD");
 
         jLabel7.setText("Hora:");
 
-        jTextFieldHora.setText("HH");
+        jTextFieldHora.setText("hh");
         jTextFieldHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldHoraActionPerformed(evt);
@@ -121,79 +120,82 @@ public class AdicionarFatura extends javax.swing.JFrame {
 
         jLabel9.setText("/");
 
-        jTextFieldData1.setText("MM");
+        jTextFieldMes.setText("MM");
 
         jLabel10.setText("/");
 
-        jTextField1.setText("AAAA");
+        jTextFieldAno.setText("AAAA");
 
         jLabel11.setText(":");
 
-        jTextFieldHora1.setText("MM");
-        jTextFieldHora1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldMinuto.setText("mm");
+        jTextFieldMinuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHora1ActionPerformed(evt);
+                jTextFieldMinutoActionPerformed(evt);
             }
         });
+
+        jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaDescricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(357, 357, 357)
-                                .addComponent(jButtonConfirmar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonCancelarVoltar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addComponent(jLabel3)
+                        .addGap(245, 245, 245))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(245, 245, 245))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldNIFCliente)
-                                        .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jTextFieldHora, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldData, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldData1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel10)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldNIFCliente)
+                                .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextFieldHora, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldDia, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(357, 357, 357)
+                        .addComponent(jButtonConfirmar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCancelarVoltar)))
                 .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
@@ -218,11 +220,11 @@ public class AdicionarFatura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextFieldData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -230,7 +232,7 @@ public class AdicionarFatura extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextFieldHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldNIFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,8 +241,8 @@ public class AdicionarFatura extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,29 +254,76 @@ public class AdicionarFatura extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarVoltarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        Integer nif;
-        int year, month, day, hour, minute;
+        Integer nif, ano, mes, dia, hora, minuto;
+        Float despesa;
+        String descricao;
+        ContribuinteColetivo tempContr;
         try{
             nif = Integer.parseInt(jTextFieldNIFCliente.getText());
         }
         catch(NumberFormatException e){
             nif = new Integer(-1);
         }
+        try{
+            ano = Integer.parseInt(jTextFieldAno.getText());
+            mes = Integer.parseInt(jTextFieldMes.getText());
+            dia = Integer.parseInt(jTextFieldDia.getText());
+        }
+        catch(NumberFormatException e){
+            ano = new Integer(-1);
+            mes = new Integer(-1);
+            dia = new Integer(-1);
+        }
+        try{
+            hora = Integer.parseInt(jTextFieldHora.getText());
+            minuto = Integer.parseInt(jTextFieldMinuto.getText());
+            
+        }
+        catch(NumberFormatException e){
+            hora = new Integer(-1);
+            minuto = new Integer(-1);
+        }
+        try{
+            despesa = Float.parseFloat(jTextFieldValorDespesa.getText());
+        } catch(NumberFormatException e){
+            despesa = new Float(-1.0);
+        }
+        //TODO: usar LocalDateTime
+        if(ano < 0 || mes < 0 || dia < 0 || mes > 12 || dia > 31){
+            JOptionPane.showMessageDialog(this, "Data inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if(hora < 0 || hora > 23 || minuto < 0 || minuto > 59){
+            JOptionPane.showMessageDialog(this, "Hora inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if(nif == -1){
+            JOptionPane.showMessageDialog(this, "NIF de cliente inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if(despesa == -1){
+            JOptionPane.showMessageDialog(this, "Valor de despesa inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            descricao = jTextAreaDescricao.getText();
+            if((tempContr = javaFactura.emitirFactura(contr, nif, ano, mes, dia, hora, minuto, descricao, despesa)) == null){
+                JOptionPane.showMessageDialog(this, "Fatura inválida", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                returnWindow.setContr(tempContr);
+                this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+                JOptionPane.showMessageDialog(this, "Fatura adicionada", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                returnWindow.setVisible(true);
+            }
+        }
+        
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jTextFieldHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHoraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldHoraActionPerformed
 
-    private void jTextFieldHora1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHora1ActionPerformed
+    private void jTextFieldMinutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMinutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHora1ActionPerformed
+    }//GEN-LAST:event_jTextFieldMinutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelarVoltar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JEditorPane jEditorPaneDescricao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -286,16 +335,17 @@ public class AdicionarFatura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldData;
-    private javax.swing.JTextField jTextFieldData1;
+    private javax.swing.JTextArea jTextAreaDescricao;
+    private javax.swing.JTextField jTextFieldAno;
+    private javax.swing.JTextField jTextFieldDia;
     private javax.swing.JTextField jTextFieldHora;
-    private javax.swing.JTextField jTextFieldHora1;
+    private javax.swing.JTextField jTextFieldMes;
+    private javax.swing.JTextField jTextFieldMinuto;
     private javax.swing.JTextField jTextFieldNIFCliente;
     private javax.swing.JTextField jTextFieldValorDespesa;
     // End of variables declaration//GEN-END:variables

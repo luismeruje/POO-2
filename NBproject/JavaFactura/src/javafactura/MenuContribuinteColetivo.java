@@ -6,6 +6,7 @@
 package javafactura;
 
 import java.awt.event.WindowEvent;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -112,6 +113,11 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         });
 
         jButtonValorDespesa.setText("valor da despesa");
+        jButtonValorDespesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValorDespesaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Obter lista das faturas emitidas ordenadas por:");
 
@@ -356,9 +362,7 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldListaData3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel14)
@@ -370,7 +374,10 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
                         .addComponent(jLabel16)
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel17)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonTotalFaturado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(67, Short.MAX_VALUE))
@@ -380,7 +387,12 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDataEmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDataEmissaoActionPerformed
-        // TODO add your handling code here:
+        List<Factura> facturas = javaFactura.getFacturasWithNIF(contr.getNif());
+        facturas.sort(new ComparatorFacturasData());
+        JFrame novoUserFrame = new ListaFaturas(this,contr,facturas);
+        this.setVisible(false);
+        novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        novoUserFrame.setVisible(true);
     }//GEN-LAST:event_jButtonDataEmissaoActionPerformed
 
     private void jButtonAdicionarFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarFaturaActionPerformed
@@ -410,6 +422,15 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jButtonValorDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValorDespesaActionPerformed
+        List<Factura> facturas = javaFactura.getFacturasWithNIF(contr.getNif());
+        facturas.sort(new ComparatorFacturasValor());
+        JFrame novoUserFrame = new ListaFaturas(this,contr,facturas);
+        this.setVisible(false);
+        novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        novoUserFrame.setVisible(true);
+    }//GEN-LAST:event_jButtonValorDespesaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

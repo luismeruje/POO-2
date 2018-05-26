@@ -6,6 +6,7 @@
 package javafactura;
 
 import java.awt.event.WindowEvent;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -15,6 +16,7 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
     JavaFactura javaFactura;
     Login returnWindow;
     ContribuinteIndividual contr;
+    DefaultListModel<Factura> model = new DefaultListModel();
     /**
      * Creates new form MenuContribuinteIndividual
      */
@@ -24,6 +26,7 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         this.returnWindow = returnWindow;
         this.setLocationRelativeTo(null);
         this.contr = contr;
+        //TableFaturas.setModel(model);
     }
 
     /**
