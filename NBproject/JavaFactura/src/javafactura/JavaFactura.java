@@ -27,6 +27,7 @@ public class JavaFactura implements Serializable
     private Admin admin;
     private Map<Integer,Float> coefs;
     private Contribuinte contribuinteAt = null;
+    private Map<String, Float> concelhosInterior;
     
 
     public JavaFactura()
@@ -35,6 +36,7 @@ public class JavaFactura implements Serializable
     this.contribuintes = new HashMap<Integer,Contribuinte>();
     this.facturas = new HashMap<Integer,Factura>();
     this.coefs = new HashMap<Integer,Float>();
+    this.concelhosInterior = new HashMap<String,Float>();
     }
     
     public JavaFactura(JavaFactura jf){
@@ -96,6 +98,13 @@ public class JavaFactura implements Serializable
         }
             
         return logado;
+    }
+    
+    public Admin loginAdmin(String Password){
+        Admin adminlog=null;
+        if (this.admin.getPassword().equals(Password))
+            adminlog=this.admin;
+        return adminlog;
     }
 
     
