@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Write a description of class Individuo here.
+ * Write a description of class ContribuinteIndividual here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Individuo extends Contribuinte
+public class ContribuinteIndividual extends Contribuinte
 {
     // instance variables - replace the example below with your own
     private List<Integer> nifAgregado;
@@ -17,14 +17,14 @@ public class Individuo extends Contribuinte
     private List<Integer> atividades;
 
     
-    public Individuo(float coefFiscal,int nif, String email, String nome, String morada, String password) {
+    public ContribuinteIndividual(float coefFiscal,int nif, String email, String nome, String morada, String password) {
         super(nif, email, nome, morada, password);
         this.nifAgregado = new ArrayList<>();
         this.coefFiscal = coefFiscal;
         this.atividades = new ArrayList<>();
     }
     
-    public Individuo(Individuo i){
+    public ContribuinteIndividual(ContribuinteIndividual i){
         super(i);
         this.nifAgregado=i.getAgregadoFamiliar();
         this.coefFiscal= i.getCoefFiscal();
@@ -76,15 +76,15 @@ public class Individuo extends Contribuinte
         
         if ((o==null) || (this.getClass() != o.getClass())) 
             return false;
-        Individuo ind = (Individuo) o;
+        ContribuinteIndividual ind = (ContribuinteIndividual) o;
         return (this.nifAgregado.equals(ind.getAgregadoFamiliar()) && this.coefFiscal == ind.getCoefFiscal() 
                 && this.atividades.equals(ind.getAtividades())
                 ) ;
         
     }
     
-    public Individuo clone(){
-         return new Individuo(this);
+    public ContribuinteIndividual clone(){
+         return new ContribuinteIndividual(this);
      }
     
 }

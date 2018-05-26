@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Write a description of class Empresa here.
+ * Write a description of class ContribuinteColetivo here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Empresa extends Contribuinte
+public class ContribuinteColetivo extends Contribuinte
 {
     // instance variables - replace the example below with your own
     private List<Integer> atividades;
@@ -17,14 +17,14 @@ public class Empresa extends Contribuinte
     private String designacao;
     
 
-    public Empresa(float factorEmpresarial, String designacao, int nif, String email, String nome, String morada, String password) {
+    public ContribuinteColetivo(float factorEmpresarial, String designacao, int nif, String email, String nome, String morada, String password) {
         super(nif, email, nome, morada, password);
         this.atividades = new ArrayList<Integer>();
         this.factorEmpresarial = factorEmpresarial;
         this.designacao= designacao;
     }
     
-    public Empresa(Empresa emp){
+    public ContribuinteColetivo(ContribuinteColetivo emp){
         super(emp);
         this.atividades= emp.getAtividades(); // confirm
         this.factorEmpresarial = emp.getFactorEmpresarial();
@@ -85,12 +85,12 @@ public class Empresa extends Contribuinte
         
         if ((o==null) || (this.getClass() != o.getClass())) 
             return false;
-        Empresa emp = (Empresa) o;
+        ContribuinteColetivo emp = (ContribuinteColetivo) o;
         return (this.factorEmpresarial == emp.getFactorEmpresarial() && this.atividades.equals(emp.getAtividades())); //confirmar
     }
 
-     public Empresa clone(){
-         return new Empresa(this);
+     public ContribuinteColetivo clone(){
+         return new ContribuinteColetivo(this);
      }
     
 }

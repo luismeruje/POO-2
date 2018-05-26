@@ -112,7 +112,7 @@ public class JavaFactura
     }
     
     //Funcao que emite factura de uma empresa para um individuo
-    public void emitirFactura(Empresa emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int tipoAtividade, int valorDesp){
+    public void emitirFactura(ContribuinteColetivo emp, int NIF, int year, int month, int day, int hour, int minute, String descricaoDesp, int tipoAtividade, int valorDesp){
         String id = String.valueOf(this.facturas.size());
         int nifEmitente = emp.getNif();
         float coefEmp = emp.getFactorEmpresarial();
@@ -195,9 +195,9 @@ public class JavaFactura
              c= (Contribuinte) it.next();
              if (c.getNif() == nif) registado = true; 
          }
-         Individuo ind;
+         ContribuinteIndividual ind;
          if (!registado){
-            ind = new Individuo(coefFiscal, nif, email, nome,morada, password);
+            ind = new ContribuinteIndividual(coefFiscal, nif, email, nome,morada, password);
 
             List <Integer> agregado = ind.getAgregadoFamiliar();
             List <Integer> atividade = ind.getAtividades();
@@ -220,9 +220,9 @@ public class JavaFactura
              c= (Contribuinte) it.next();
              if (c.getNif() == nif) registado = true; 
          }
-         Empresa emp;
+         ContribuinteColetivo emp;
          if (!registado){
-            emp = new Empresa(factorEmpresarial,designacao, nif, email, nome,morada, password);
+            emp = new ContribuinteColetivo(factorEmpresarial,designacao, nif, email, nome,morada, password);
 
             List <Integer> atividade = emp.getAtividades();
             for(Integer i: atividades){
@@ -233,7 +233,7 @@ public class JavaFactura
          return registado;
      }
      
-     public float getDeduzidoAgregado(Individuo ind){
+     public float getDeduzidoAgregado(ContribuinteIndividual ind){
          int nif = ind.getNif();
          List<Integer> agregado = ind.getAgregadoFamiliar();
          float deduzido=0;
