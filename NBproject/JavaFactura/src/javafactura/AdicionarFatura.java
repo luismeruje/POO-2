@@ -47,18 +47,14 @@ public class AdicionarFatura extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        CheckBoxRestauracao = new javax.swing.JCheckBox();
-        CheckBoxSaude = new javax.swing.JCheckBox();
-        CheckBoxEducacao = new javax.swing.JCheckBox();
-        CheckBoxHabitacao = new javax.swing.JCheckBox();
-        CheckBoxDespesasFamiliares = new javax.swing.JCheckBox();
-        jTextFieldDataDespesa = new javax.swing.JTextField();
+        jTextFieldData = new javax.swing.JTextField();
         jTextFieldNIFCliente = new javax.swing.JTextField();
         jTextFieldValorDespesa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPaneDescricao = new javax.swing.JEditorPane();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldHora = new javax.swing.JTextField();
 
         jSeparator2.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
@@ -90,38 +86,32 @@ public class AdicionarFatura extends javax.swing.JFrame {
         });
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("Data da despesa:");
+        jLabel4.setText("Data:");
 
         jLabel5.setText("NIF do cliente:");
 
         jLabel6.setText("Descrição da despesa:");
 
-        jLabel7.setText("Atividade económica a que diz respeito:");
-
         jLabel8.setText("Valor da despesa:");
 
-        CheckBoxRestauracao.setText("Restauração");
-        CheckBoxRestauracao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckBoxRestauracaoActionPerformed(evt);
-            }
-        });
-
-        CheckBoxSaude.setText("Saúde");
-
-        CheckBoxEducacao.setText("Educação");
-        CheckBoxEducacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckBoxEducacaoActionPerformed(evt);
-            }
-        });
-
-        CheckBoxHabitacao.setText("Habitação");
-
-        CheckBoxDespesasFamiliares.setText("Despesas Familiares");
+        jTextFieldData.setText("DD/MM/AAAA");
 
         jScrollPane1.setViewportView(jEditorPaneDescricao);
+
+        jLabel7.setText("Hora:");
+
+        jTextFieldHora.setText("HH:MM");
+        jTextFieldHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldHoraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,28 +140,17 @@ public class AdicionarFatura extends javax.swing.JFrame {
                                 .addGap(245, 245, 245))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextFieldDataDespesa)
-                                            .addComponent(jTextFieldNIFCliente)
-                                            .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(CheckBoxRestauracao)
-                                            .addComponent(CheckBoxEducacao, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CheckBoxSaude, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CheckBoxHabitacao)
-                                            .addComponent(CheckBoxDespesasFamiliares))))
-                                .addGap(70, 70, 70)))
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldData)
+                                    .addComponent(jTextFieldNIFCliente)
+                                    .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldHora))
+                                .addGap(141, 141, 141)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -199,29 +178,21 @@ public class AdicionarFatura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldDataDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextFieldNIFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7)
+                            .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel7)
+                            .addComponent(jTextFieldNIFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CheckBoxRestauracao)
-                            .addComponent(CheckBoxHabitacao))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CheckBoxEducacao)
-                            .addComponent(CheckBoxDespesasFamiliares))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CheckBoxSaude))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldValorDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(81, 81, 81))
         );
@@ -229,26 +200,28 @@ public class AdicionarFatura extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CheckBoxRestauracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxRestauracaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CheckBoxRestauracaoActionPerformed
-
-    private void CheckBoxEducacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxEducacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CheckBoxEducacaoActionPerformed
-
     private void jButtonCancelarVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarVoltarActionPerformed
         this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
         returnWindow.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarVoltarActionPerformed
 
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        Integer nif;
+        int year, month, day, hour, minute;
+        try{
+            nif = Integer.parseInt(jTextFieldNIFCliente.getText());
+        }
+        catch(NumberFormatException e){
+            nif = new Integer(-1);
+        }
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jTextFieldHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldHoraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CheckBoxDespesasFamiliares;
-    private javax.swing.JCheckBox CheckBoxEducacao;
-    private javax.swing.JCheckBox CheckBoxHabitacao;
-    private javax.swing.JCheckBox CheckBoxRestauracao;
-    private javax.swing.JCheckBox CheckBoxSaude;
     private javax.swing.JButton jButtonCancelarVoltar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JEditorPane jEditorPaneDescricao;
@@ -265,7 +238,8 @@ public class AdicionarFatura extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextFieldDataDespesa;
+    private javax.swing.JTextField jTextFieldData;
+    private javax.swing.JTextField jTextFieldHora;
     private javax.swing.JTextField jTextFieldNIFCliente;
     private javax.swing.JTextField jTextFieldValorDespesa;
     // End of variables declaration//GEN-END:variables

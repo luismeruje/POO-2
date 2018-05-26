@@ -5,6 +5,8 @@
  */
 package javafactura;
 
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author utilizador
@@ -63,6 +65,11 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         ButtonTerminarSessao.setText("Terminar sessão");
+        ButtonTerminarSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonTerminarSessaoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Faturas em seu nome:");
 
@@ -204,6 +211,11 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
     private void ComboBoxAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBoxAnoActionPerformed
+
+    private void ButtonTerminarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonTerminarSessaoActionPerformed
+        this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+        returnWindow.setVisible(true);
+    }//GEN-LAST:event_ButtonTerminarSessaoActionPerformed
 
  
 
