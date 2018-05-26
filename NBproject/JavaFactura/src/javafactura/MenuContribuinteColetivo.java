@@ -9,17 +9,19 @@ package javafactura;
  *
  * @author utilizador
  */
-public class MenuEmpresa extends javax.swing.JFrame {
+public class MenuContribuinteColetivo extends javax.swing.JFrame {
     JavaFactura javaFactura;
     Login returnWindow;
+    ContribuinteColetivo contr;
     /**
      * Creates new form MenuEmpresa
      */
-    public MenuEmpresa(JavaFactura javaFactura, Login returnWindow) {
+    public MenuContribuinteColetivo(JavaFactura javaFactura, Login returnWindow, ContribuinteColetivo contr) {
         initComponents();
         this.javaFactura = javaFactura;
         this.returnWindow = returnWindow;
         this.setLocationRelativeTo(null);
+        this.contr = contr;
     }
 
     /**
@@ -62,7 +64,6 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 500));
 
         jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
         jLabel1.setText("JavaFatura");

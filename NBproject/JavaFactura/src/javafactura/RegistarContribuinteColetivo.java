@@ -389,10 +389,14 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
                 atividades.add(CommonVariables.DESPESAS_FAMILIARES);
                 
             if(email.length() > 0 && nome.length() > 0 && morada.length() > 0 && password.length() > 0 && atividades.size() > 0){
-                javaFactura.registaContribuinteColetivo(nif,email,nome,morada,password,fatorEmpresarial,atividades);
-                this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
-                returnPage.setVisible(true);  
-                JOptionPane.showMessageDialog(this, "Registado com sucesso.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                if(javaFactura.registaContribuinteColetivo(nif,email,nome,morada,password,fatorEmpresarial,atividades)){
+                    this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+                    returnPage.setVisible(true);
+                    JOptionPane.showMessageDialog(this, "Registado com sucesso.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Utilizador com nif " + nif + " já registado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
             else{
                 JOptionPane.showMessageDialog(this, "Preencher campos vazios.", "Erro", JOptionPane.ERROR_MESSAGE);

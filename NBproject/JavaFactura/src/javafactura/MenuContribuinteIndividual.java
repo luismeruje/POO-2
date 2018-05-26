@@ -12,14 +12,16 @@ package javafactura;
 public class MenuContribuinteIndividual extends javax.swing.JFrame {
     JavaFactura javaFactura;
     Login returnWindow;
+    ContribuinteIndividual contr;
     /**
      * Creates new form MenuContribuinteIndividual
      */
-    public MenuContribuinteIndividual(JavaFactura javaFactura, Login returnWindow) {
+    public MenuContribuinteIndividual(JavaFactura javaFactura, Login returnWindow, ContribuinteIndividual contr) {
         initComponents();
         this.javaFactura = javaFactura;
         this.returnWindow = returnWindow;
         this.setLocationRelativeTo(null);
+        this.contr = contr;
     }
 
     /**

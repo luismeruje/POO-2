@@ -172,29 +172,46 @@ public class Login extends javax.swing.JFrame {
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         Integer nif;
         String password;
-        try{
-            nif = Integer.parseInt(jTextFieldNIF.getText());
-            password = jPasswordField.getText();
-            Contribuinte contr = javaFactura.login(nif,password);
-            if(contr instanceof ContribuinteColetivo){
-                JFrame novoUserFrame = new MenuEmpresa(javaFactura,this);
+        if(jTextFieldNIF.getText().length() == 0){
+            Admin admin;
+            if((admin = javaFactura.loginAdmin(jPasswordField.getText())) != null){
+                JFrame novoUserFrame = new MenuAdmin(javaFactura,this,admin);
                 this.setVisible(false);
                 novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 novoUserFrame.setVisible(true);
             }
-            else if(contr instanceof ContribuinteIndividual){
-                JFrame novoUserFrame = new MenuContribuinteIndividual(javaFactura,this);
-                this.setVisible(false);
-                novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                novoUserFrame.setVisible(true);
-                JOptionPane.showMessageDialog(this, "Sessão iniciada.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            try{
+                nif = Integer.parseInt(jTextFieldNIF.getText());
+                password = jPasswordField.getText();
+                Contribuinte contr = javaFactura.login(nif,password);
+                if(contr != null){
+                    if(contr instanceof ContribuinteColetivo){
+                        JFrame novoUserFrame = new MenuContribuinteColetivo(javaFactura,this,(ContribuinteColetivo)contr);
+                        this.setVisible(false);
+                        novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        novoUserFrame.setVisible(true);
+                    }
+                    else if(contr instanceof ContribuinteIndividual){
+                        JFrame novoUserFrame = new MenuContribuinteIndividual(javaFactura,this,(ContribuinteIndividual)contr);
+                        this.setVisible(false);
+                        novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        novoUserFrame.setVisible(true);
+                        JOptionPane.showMessageDialog(this, "Sessão iniciada.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Erro de sistema. Por favor contacte apoio técnico.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Login inválido.", "Login", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            catch(NumberFormatException e){
+                jTextFieldNIF.setText("");
+                JOptionPane.showMessageDialog(this, "NIF deve ser um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
-        catch(NumberFormatException e){
-            jTextFieldNIF.setText("");
-            JOptionPane.showMessageDialog(this, "NIF deve ser um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-        
         
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
