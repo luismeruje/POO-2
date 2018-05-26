@@ -55,6 +55,11 @@ public class Factura implements Serializable
     public void setRegistos(List<Registo> registos){
         this.registos=registos;
     }
+    
+    public void addRegisto(Registo registo) {
+        this.registos.add(registo);
+    }
+    
     public int getId() {
         return id;
     }

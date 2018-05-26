@@ -143,14 +143,18 @@ public class JavaFactura implements Serializable
     
     public boolean associarFacturaAtividade(Factura f, int atividade){
         boolean flag = false;
-        int nifE= f.getNifEmitente();
+        int nifE = f.getNifEmitente();
         ContribuinteColetivo cc = (ContribuinteColetivo) this.contribuintes.get(nifE);
         List<Integer> atividades = cc.getAtividades();
+        
         if(atividades.contains(atividade)){
             flag = true;
+            int atividadeAntiga = f.getAtividade();
             f.setAtividade(atividade);
             f.setValorDeduzido(getValorDeduzido(nifE, atividade, f.getValor(), cc.getFactorEmpresarial(), f.getNifCliente()));
+            f.addRegisto(new Registo("Atividade Económica alterada", atividadeAntiga, atividade));
         }
+        
         return flag;
     }
     //Funcao que emite factura de uma empresa para um individuo
