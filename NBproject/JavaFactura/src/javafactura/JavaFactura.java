@@ -121,7 +121,7 @@ public class JavaFactura
         String id = String.valueOf(this.facturas.size());
         int nifEmitente = emp.getNif();
         float coefEmp = emp.getFactorEmpresarial();
-        String designacao = emp.getDesignacao(); 
+        String designacao = emp.getNome(); 
         LocalDateTime dataDespesa = LocalDateTime.of(year,month,day,hour,minute);
         int nifCliente = NIF;
         String descricao = descricaoDesp;
