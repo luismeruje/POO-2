@@ -354,7 +354,7 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
     private void ButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmarActionPerformed
         Integer nif ;
         
-        String email, nome, morada, password;
+        String email, nome, morada, password, concelho;
         Float fatorEmpresarial;
         List<Integer> atividades = new ArrayList<>();
         try{
@@ -381,6 +381,7 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
             nome = textFieldNome.getText();
             morada = textFieldMorada.getText();
             password = textFieldPassword.getText();
+            concelho = jTextFieldConcelho.getText();
             if(checkBoxRestauracao.isSelected())
                 atividades.add(CommonVariables.RESTAURACAO);
             if(checkBoxEducacao.isSelected())

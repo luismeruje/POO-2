@@ -5,6 +5,9 @@
  */
 package javafactura;
 
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author utilizador
@@ -76,6 +79,11 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jButtonTerminarSessao.setText("Terminar sessão");
+        jButtonTerminarSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTerminarSessaoActionPerformed(evt);
+            }
+        });
 
         jButtonDataEmissao.setText("data de emissão");
         jButtonDataEmissao.addActionListener(new java.awt.event.ActionListener() {
@@ -247,8 +255,16 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDataEmissaoActionPerformed
 
     private void jButtonAdicionarFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarFaturaActionPerformed
-        // TODO add your handling code here:
+        JFrame novoUserFrame = new AdicionarFatura(javaFactura,this,contr);
+        this.setVisible(false);
+        novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        novoUserFrame.setVisible(true);
     }//GEN-LAST:event_jButtonAdicionarFaturaActionPerformed
+
+    private void jButtonTerminarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTerminarSessaoActionPerformed
+        this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+        returnWindow.setVisible(true);
+    }//GEN-LAST:event_jButtonTerminarSessaoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

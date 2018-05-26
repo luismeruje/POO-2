@@ -5,23 +5,25 @@
  */
 package javafactura;
 
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author utilizador
  */
 public class MenuAdmin extends javax.swing.JFrame {
     JavaFactura javaFactura;
-    Login returnPage;
+    Login returnWindow;
     Admin admin;
     
     /**
      * Creates new form MenuAdmin
      */
-    public MenuAdmin(JavaFactura javaFactura, Login returnPage, Admin admin) {
+    public MenuAdmin(JavaFactura javaFactura, Login returnWindow, Admin admin) {
         initComponents();
         this.javaFactura = javaFactura;
         this.setLocationRelativeTo(null);
-        this.returnPage = returnPage;
+        this.returnWindow = returnWindow;
     }
 
     /**
@@ -143,7 +145,8 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMaisFaturasActionPerformed
 
     private void jButtonTerminarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTerminarSessaoActionPerformed
-        // TODO add your handling code here:
+        this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+        returnWindow.setVisible(true);
     }//GEN-LAST:event_jButtonTerminarSessaoActionPerformed
 
 
