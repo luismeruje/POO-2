@@ -7,6 +7,7 @@ package javafactura;
 
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -186,12 +187,12 @@ public class Login extends javax.swing.JFrame {
                 this.setVisible(false);
                 novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 novoUserFrame.setVisible(true);
+                JOptionPane.showMessageDialog(this, "Sessão iniciada.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         catch(NumberFormatException e){
-            //TODO: mostrar warning de nif n é número;
             jTextFieldNIF.setText("");
-            System.out.println("NIF deve ser um número inteiro.");
+            JOptionPane.showMessageDialog(this, "NIF deve ser um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
         

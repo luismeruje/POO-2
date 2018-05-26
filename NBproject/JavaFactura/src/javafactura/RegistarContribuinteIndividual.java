@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author utilizador
@@ -54,7 +55,6 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
         textFieldNIF = new javax.swing.JTextField();
         textFieldEmail = new javax.swing.JTextField();
         textFieldMorada = new javax.swing.JTextField();
-        textFieldPassword = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         textFieldNrFilhos = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
@@ -76,6 +76,7 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
         checkBoxHabitacao = new javax.swing.JCheckBox();
         checkBoxDespesasFamiliares = new javax.swing.JCheckBox();
         checkBoxRestauracao = new javax.swing.JCheckBox();
+        textFieldPassword = new javax.swing.JPasswordField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -250,8 +251,8 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(textFieldNIF)))
+                            .addComponent(textFieldNIF, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(textFieldPassword)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -268,7 +269,7 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel2)))
-                .addGap(27, 27, 27))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,8 +299,8 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(textFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(textFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldMorada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,9 +366,8 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
             nifAgregado.add(nif);
         }
         catch(NumberFormatException e){
-            //TODO: mostrar warning de nif n é número;
             textFieldNIFAgregadoFamiliar.setText("");
-            System.out.println("NIF deve ser um número inteiro.");
+            JOptionPane.showMessageDialog(this, "NIF deve ser um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
@@ -397,19 +397,15 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
         }
         
         if(nif <= 0){
-            //TODO: mostrar warning de nif n é número;
             textFieldNIF.setText("");
-            System.out.println("NIF deve ser um número inteiro.");
+            JOptionPane.showMessageDialog(this, "NIF deve ser um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else if(fatorEmpresarial < 0){
-            //TODO: mostrar Warning de fator errado;
-            System.out.println("Factor não é float.");
+            JOptionPane.showMessageDialog(this, "Factor não é float.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else if(nrFilhos < 0){
-            //TODO: mostrar warning de nif n é número;
             textFieldNrFilhos.setText("");
-            System.out.println("Nr filhos deve ser um número inteiro.");
+            JOptionPane.showMessageDialog(this, "Número de filhos deve ser um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else if(!(email = textFieldEmail.getText()).contains("@")){
-            //TODO: mostrar warning email inválido
-            System.out.println("Email inválido");
+            JOptionPane.showMessageDialog(this, "Email inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else{
             nome = textFieldNome.getText();
             morada = textFieldMorada.getText();
@@ -426,17 +422,15 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
                 atividades.add(CommonVariables.DESPESAS_FAMILIARES);
             
             if(nrFilhos > nifAgregado.size()){
-                //TODO:Warning nrFilhos > nr nif's do agregado registados
-                System.out.printf("Nr filhos demasiado alto");
+                JOptionPane.showMessageDialog(this, "Número de filhos demasiado alto.", "Erro", JOptionPane.ERROR_MESSAGE);
             } else if(email.length() > 0 && nome.length() > 0 && morada.length() > 0 && password.length() > 0 && atividades.size() > 0){
                 javaFactura.registaContribuinteIndividual(nif,email,nome,morada,password,nifAgregado,fatorEmpresarial,atividades,nrFilhos);
                 this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
-                returnPage.setVisible(true);  
-                System.out.println("Registado com sucesso");
+                returnPage.setVisible(true);
+                JOptionPane.showMessageDialog(this, "Registado com sucesso.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                //TODO: warning campos vazios.
-                System.out.println("Preencher campos vazios");
+                JOptionPane.showMessageDialog(this, "Preencher campos vazios.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
       
         }
@@ -496,6 +490,6 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldNIFAgregadoFamiliar;
     private javax.swing.JTextField textFieldNome;
     private javax.swing.JTextField textFieldNrFilhos;
-    private javax.swing.JTextField textFieldPassword;
+    private javax.swing.JPasswordField textFieldPassword;
     // End of variables declaration//GEN-END:variables
 }

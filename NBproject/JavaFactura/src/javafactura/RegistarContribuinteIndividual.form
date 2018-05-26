@@ -128,8 +128,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="textFieldPassword" pref="160" max="32767" attributes="0"/>
-                          <Component id="textFieldNIF" max="32767" attributes="0"/>
+                          <Component id="textFieldNIF" pref="160" max="32767" attributes="0"/>
+                          <Component id="textFieldPassword" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -153,7 +153,7 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -191,8 +191,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="textFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -326,8 +326,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textFieldMorada">
     </Component>
-    <Component class="javax.swing.JTextField" name="textFieldPassword">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xba; de filhos:"/>
@@ -459,6 +457,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Restaura&#xe7;&#xe3;o"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="textFieldPassword">
     </Component>
   </SubComponents>
 </Form>
