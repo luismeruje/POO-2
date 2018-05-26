@@ -1,5 +1,12 @@
 package javafactura;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,7 +20,7 @@ import java.util.stream.Collectors;
  * @version (a version number or a date)
  */
 
-public class JavaFactura
+public class JavaFactura implements Serializable
 {
     private List<Contribuinte> contribuintes;
     private List<Factura> facturas;
@@ -303,5 +310,53 @@ public class JavaFactura
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
           
           return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(10).collect(Collectors.toList());
+      }
+      
+      public List<Contribuinte> getTopXEmpresasComMaisFacturas(int x){
+          Map<Contribuinte,Integer> topEmpresas= new HashMap<Contribuinte,Integer>();
+          int facturasCount=0;
+          List<Factura> facturas;
+          Contribuinte l = null;
+          for (Contribuinte c: this.contribuintes){
+              if (c instanceof ContribuinteColetivo){
+              l = c.clone();
+              facturas=this.getFacturasWithNIF(l.getNif());
+              facturasCount += facturas.size();
+              topEmpresas.put(l, facturasCount);
+              }
+          }
+          HashMap<Contribuinte,Integer> topContribuintesOrdenado = topEmpresas.entrySet().stream()
+                                                             .sorted(Entry.comparingByValue())
+                                                             .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
+          
+          return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(x).collect(Collectors.toList());
+      }
+       // verificar se esta por ordem esta...
+      public Map<Contribuinte,Float>getTopXEmpresasFaturadoras(int x){
+          List<Contribuinte> topxEmpresas= this.getTopXEmpresasComMaisFacturas(x);
+          Contribuinte l;
+          Map<Contribuinte,Float> topEmpresas = new HashMap<Contribuinte,Float>();
+          for(Contribuinte c: topxEmpresas){
+              l=c.clone();
+              float deducoes= this.getValorDeduzidoAnual(l.getNif());
+              topEmpresas.put(l, deducoes);
+          }
+          return topEmpresas;
+      }
+      
+      public void guardaEstado(String filename) throws FileNotFoundException, IOException{
+          FileOutputStream fos= new FileOutputStream(filename);
+          ObjectOutputStream oos= new ObjectOutputStream(fos);
+          oos.writeObject(this);
+          oos.flush();
+          oos.close();
+      }
+      
+      public static JavaFactura carregaEstado(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+          FileInputStream fis= new FileInputStream(filename);
+          ObjectInputStream ois = new ObjectInputStream(fis);
+          JavaFactura jf = (JavaFactura) ois.readObject();
+          ois.close();
+          return jf;
       }
 }
