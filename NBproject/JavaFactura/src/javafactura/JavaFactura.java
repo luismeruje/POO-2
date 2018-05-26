@@ -18,7 +18,12 @@ public class JavaFactura
     private Admin admin;
     private Map<Integer,Float> coefs;
     private Contribuinte contribuinteAt = null;
-   
+    private static final int RESTAURACAO = 1;
+    private static final int EDUCACAO = 2;
+    private static final int SAUDE = 3;
+    private static final int HABITACAO = 4;
+    private static final int DESPESAS_FAMILIARES = 5;
+
     public JavaFactura(Admin admin)
     {
     this.admin = admin;
@@ -266,5 +271,21 @@ public class JavaFactura
                     facc.add(f);
                 });
        return facc;
+     }
+     
+     public float getFacturadoEntreDatas(int NIF, LocalDateTime dataMenor, LocalDateTime dataMaior){
+         float faturado=0;
+         List<Factura> facc = getFacturasEmpresaEntreDatas(NIF, dataMenor,dataMaior);
+         for (Factura f: facc)
+             faturado += f.getValor();
+         return faturado;
+     }
+     
+      public float getDeduzidoEntreDatas(int NIF, LocalDateTime dataMenor, LocalDateTime dataMaior){
+         float faturado=0;
+         List<Factura> facc = getFacturasEmpresaEntreDatas(NIF, dataMenor,dataMaior);
+         for (Factura f: facc)
+             faturado += f.getValor();
+         return faturado;
      }
 }
