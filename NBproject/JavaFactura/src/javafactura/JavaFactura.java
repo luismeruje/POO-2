@@ -17,7 +17,7 @@ public class JavaFactura
     private List<Factura> facturas;
     private Admin admin;
     private Map<Integer,Float> coefs;
-    
+    private Contribuinte contribuinteAt = null;
    
     public JavaFactura(Admin admin)
     {
