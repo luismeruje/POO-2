@@ -32,7 +32,7 @@ public class JavaFactura implements Serializable
 
     public JavaFactura()
     {
-    this.admin = new Admin("Melon");
+    this.admin = new Admin("admin");
     this.contribuintes = new HashMap<Integer,Contribuinte>();
     this.facturas = new HashMap<Integer,Factura>();
     this.coefs = new HashMap<Integer,Float>();
@@ -155,7 +155,7 @@ public class JavaFactura implements Serializable
         float valor= valorDesp;
         boolean confirmado=false;
             if(emp.getAtividades().size()==1) {atividade = tipoAtividade;
-                valorDeduzido=getValorDeduzido(nifEmitente, atividade, valor, coefEmp); //fazerAlgoritmo
+                valorDeduzido=getValorDeduzido(nifEmitente, atividade, valor, coefEmp, nifCliente); //fazerAlgoritmo
             }
             else {atividade = -1;
                 valorDeduzido=0;
@@ -175,13 +175,30 @@ public class JavaFactura implements Serializable
         return valorTotal;
     }
     
-    public float getValorDeduzido(int nifEmitente,int atividade,float valor, float coefEmp){
-        float valorDeduzido=0;
+    public float getValorDeduzido(int nifEmitente,int atividade,float valor, float coefEmp, int nifCliente){
+        float valorDeduzido = 0;
+        ContribuinteIndividual ci = (ContribuinteIndividual) this.contribuintes.get(nifCliente);
+        ContribuinteColetivo cc = (ContribuinteColetivo) this.contribuintes.get(nifEmitente);
+        float coefFiscal = ci.getCoefFiscal();
+        int nrFilhos = ci.getNrFilhos();
+        float bonusConcelho = 0;
+        
+        if (this.concelhosInterior.containsKey(cc.getConcelho()))
+            bonusConcelho = this.concelhosInterior.get(cc.getConcelho());
+        if (nrFilhos <=4)
+            nrFilhos =0;
+        
+        float reducao = 1 + reducaoImposto(nrFilhos, bonusConcelho);
         if(this.coefs.containsKey(atividade)){
-            valorDeduzido= valor* coefEmp * this.coefs.get(atividade);
+            valorDeduzido= valor* coefEmp * coefFiscal * this.coefs.get(atividade) * reducao;
         }
         return valorDeduzido;
     }
+    
+    public float reducaoImposto(int nrFilhos, float bonusConcelho){
+        return (float) (nrFilhos * 0.05 + bonusConcelho);
+    }
+    
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Contribuintes:\n");
@@ -237,12 +254,12 @@ public class JavaFactura implements Serializable
          return notRegistado;
      }
      
-     public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,float factorEmpresarial, List<Integer> atividades){
+     public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,float factorEmpresarial, List<Integer> atividades, String concelho){
          boolean notRegistado=false;
          
          ContribuinteColetivo emp;
          if (notRegistado = !this.contribuintes.containsKey(nif)){
-            emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome,morada, password);
+            emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome,morada, password, concelho);
 
             List <Integer> atividade = emp.getAtividades();
             for(Integer i: atividades){

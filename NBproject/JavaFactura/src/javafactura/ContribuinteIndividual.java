@@ -59,6 +59,15 @@ public class ContribuinteIndividual extends Contribuinte
     public void setAtividade(Integer atividade) {
         this.atividades.add(atividade);
     }
+
+    public int getNrFilhos() {
+        return nrFilhos;
+    }
+
+    public void setNrFilhos(int nrFilhos) {
+        this.nrFilhos = nrFilhos;
+    }
+    
     
     public String toString(){
         StringBuilder sb = new StringBuilder();

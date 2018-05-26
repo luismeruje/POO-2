@@ -15,20 +15,31 @@ public class ContribuinteColetivo extends Contribuinte implements Serializable
     // instance variables - replace the example below with your own
     private List<Integer> atividades;
     private float factorEmpresarial;
+    private String concelho;
     
 
-    public ContribuinteColetivo(float factorEmpresarial, int nif, String email, String nome, String morada, String password) {
+    public ContribuinteColetivo(float factorEmpresarial, int nif, String email, String nome, String morada, String password, String concelho) {
         super(nif, email, nome, morada, password);
         this.atividades = new ArrayList<Integer>();
         this.factorEmpresarial = factorEmpresarial;
-       ;
+        this.concelho = concelho;
     }
     
     public ContribuinteColetivo(ContribuinteColetivo emp){
         super(emp);
         this.atividades= emp.getAtividades(); // confirm
         this.factorEmpresarial = emp.getFactorEmpresarial();
+        this.concelho = emp.getConcelho();
     }
+
+    public String getConcelho() {
+        return concelho;
+    }
+
+    public void setConcelho(String concelho) {
+        this.concelho = concelho;
+    }
+    
     
     public List<Integer> getAtividades () {
         return this.atividades;
