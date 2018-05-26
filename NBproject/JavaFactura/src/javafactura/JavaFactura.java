@@ -217,7 +217,7 @@ public class JavaFactura
          return registado;
      }
      
-     public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,String designacao,float factorEmpresarial, List<Integer> atividades){
+     public boolean registaContribuinteColetivo( int nif,String email,String nome,String morada,String password,float factorEmpresarial, List<Integer> atividades){
          boolean registado=false;
          Iterator it = this.contribuintes.listIterator();
          Contribuinte c;
@@ -227,7 +227,7 @@ public class JavaFactura
          }
          ContribuinteColetivo emp;
          if (!registado){
-            emp = new ContribuinteColetivo(factorEmpresarial,designacao, nif, email, nome,morada, password);
+            emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome,morada, password);
 
             List <Integer> atividade = emp.getAtividades();
             for(Integer i: atividades){
