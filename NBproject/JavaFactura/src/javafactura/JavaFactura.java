@@ -263,6 +263,19 @@ public class JavaFactura implements Serializable
         return valorTotal;
     }
     
+    public float getValorGastoAnual(int nifC, int ano) {
+        
+        float valorTotal = 0;
+        
+        if (this.contribuintes.containsKey(nifC)) {
+            
+            List<Factura> facc = this.getFacturasWithNIF(nifC);
+            for (Factura f: facc)
+                if (f.getDataDespesa().getYear() == ano) valorTotal += f.getValor(); 
+        }
+        return valorTotal;
+    }
+    
     public float getValorDeduzido(int nifEmitente,int atividade,float valor, float coefEmp, int nifCliente){
         float valorDeduzido = 0;
         ContribuinteIndividual ci = (ContribuinteIndividual) this.contribuintes.get(nifCliente);
@@ -422,7 +435,11 @@ public class JavaFactura implements Serializable
               if (c instanceof ContribuinteIndividual){
                 l = c;
                 ano = LocalDateTime.now().getYear();
+                /*
+                
                 contribuicao=this.getValorDeduzidoAnual(l.getNif(),ano);
+                */
+                contribuicao= this.getValorGastoAnual(l.getNif(),ano);
                 topContribuintes.put(l, contribuicao);
               }
           }
