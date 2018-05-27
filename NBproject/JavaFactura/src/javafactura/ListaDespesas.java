@@ -7,6 +7,7 @@ package javafactura;
 
 import java.awt.event.WindowEvent;
 import java.util.Map;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,15 +24,22 @@ public class ListaDespesas extends javax.swing.JFrame {
         initComponents();
         this.returnWindow = returnWindow;
         jLabelNIF.setText(nif.toString());
-        jLabelRestauracao.setText(despesas.get(1) + "€");
-        jLabelEducacao.setText(despesas.get(2) + "€");
-        jLabelSaude.setText(despesas.get(3) + "€");
-        jLabelHabitacao.setText(despesas.get(4) + "€");
-        jLabelDespesasFamiliares.setText(despesas.get(5) + "€");
+        updateLabel(jLabelRestauracao, despesas.get(1));
+        updateLabel(jLabelEducacao, despesas.get(2));
+        updateLabel(jLabelSaude, despesas.get(3));
+        updateLabel(jLabelHabitacao, despesas.get(4));
+        updateLabel(jLabelDespesasFamiliares, despesas.get(5));
     }
     
     public void mostraAnterior(){
         returnWindow.setVisible(true);
+    }
+    
+    public void updateLabel(JLabel jLabel, Float value) {
+        if (value != null)
+            jLabel.setText(value + "€");
+        else
+            jLabel.setText("0.00 €");
     }
 
     /**
