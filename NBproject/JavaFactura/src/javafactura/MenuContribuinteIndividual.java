@@ -57,10 +57,10 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         jTableFaturasPorValidar = new javax.swing.JTable();
         ButtonAlterarAtividadeEconomica = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        ComboBoxAno = new javax.swing.JComboBox<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         jComboBoxAtividadeEconomica = new javax.swing.JComboBox<>();
+        jTextFieldAno = new javax.swing.JTextField();
+        jButtonObterMontante = new javax.swing.JButton();
+        jLabelMontante = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,15 +130,19 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
 
         jLabel4.setText("Montante de dedução fiscal acumulado por si e pelo agregado familiar no ano");
 
-        ComboBoxAno.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxAtividadeEconomica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restauração", "Habitação", "Despesas Familiares", "Educação", "Saúde" }));
+
+        jTextFieldAno.setText("AAAA");
+
+        jButtonObterMontante.setText("Obter");
+        jButtonObterMontante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxAnoActionPerformed(evt);
+                jButtonObterMontanteActionPerformed(evt);
             }
         });
 
-        jScrollPane3.setViewportView(jTextPane1);
-
-        jComboBoxAtividadeEconomica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restauração", "Habitação", "Despesas Familiares", "Educação", "Saúde" }));
+        jLabelMontante.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        jLabelMontante.setText("N/A");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,23 +154,25 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(ButtonAlterarAtividadeEconomica)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel3)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabelMontante, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonObterMontante)))
                         .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -208,13 +214,13 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
                             .addComponent(ButtonAlterarAtividadeEconomica)
                             .addComponent(jComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonObterMontante)
+                    .addComponent(jLabelMontante))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -232,10 +238,6 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         returnWindow.setVisible(true);
     }
     
-    private void ComboBoxAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBoxAnoActionPerformed
-
     private void ButtonTerminarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonTerminarSessaoActionPerformed
         this.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
         returnWindow.setVisible(true);
@@ -273,24 +275,42 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ButtonAlterarAtividadeEconomicaActionPerformed
 
+    private void jButtonObterMontanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObterMontanteActionPerformed
+        Integer ano;
+        
+        try {
+            ano = Integer.parseInt(jTextFieldAno.getText());
+        }
+        catch(NumberFormatException e){
+            ano = new Integer(-1);
+        }
+        
+        if (ano == -1)
+            JOptionPane.showMessageDialog(this, "Ano inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        else {
+            float montante = this.javaFactura.getDeduzidoAgregado(contr, ano);
+            jLabelMontante.setText(montante + "€");
+        }
+    }//GEN-LAST:event_jButtonObterMontanteActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonAlterarAtividadeEconomica;
     private javax.swing.JButton ButtonTerminarSessao;
-    private javax.swing.JComboBox<String> ComboBoxAno;
+    private javax.swing.JButton jButtonObterMontante;
     private javax.swing.JComboBox<String> jComboBoxAtividadeEconomica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelMontante;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTableFaturas;
     private javax.swing.JTable jTableFaturasPorValidar;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextField jTextFieldAno;
     // End of variables declaration//GEN-END:variables
 }

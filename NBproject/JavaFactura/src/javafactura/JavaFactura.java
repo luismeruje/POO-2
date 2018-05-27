@@ -30,13 +30,14 @@ public class JavaFactura implements Serializable
     private Map<String, Float> concelhosInterior;
     
 
-    public JavaFactura()
-    {
-    this.admin = new Admin("admin");
-    this.contribuintes = new HashMap<Integer,Contribuinte>();
-    this.facturas = new HashMap<Integer,Factura>();
-    this.coefs = new HashMap<Integer,Float>();
-    this.concelhosInterior = new HashMap<String,Float>();
+    public JavaFactura() {
+        this.admin = new Admin("admin");
+        this.contribuintes = new HashMap<Integer,Contribuinte>();
+        this.facturas = new HashMap<Integer,Factura>();
+        this.coefs = new HashMap<Integer,Float>();
+        this.concelhosInterior = new HashMap<String,Float>();
+        this.inicializaCoefs();
+        this.inicializaConcelhos();
     }
     
     public JavaFactura(JavaFactura jf){
@@ -44,6 +45,24 @@ public class JavaFactura implements Serializable
         this.contribuintes = jf.getContribuintes();
         this.facturas = jf.getFacturas();
         this.coefs= jf.getCoefs();
+    }
+    
+    public void inicializaCoefs() {
+        this.coefs.put(1, (float) 0.15);
+        this.coefs.put(2, (float) 0.3);
+        this.coefs.put(3, (float) 0.15);
+        this.coefs.put(4, (float) 0.15);
+        this.coefs.put(5, (float) 0.35);
+    }
+    
+    public void inicializaConcelhos() {
+        this.concelhosInterior.put("Évora", (float) 0.1);
+        this.concelhosInterior.put("Lousã", (float) 0.12);
+        this.concelhosInterior.put("Aljezur", (float) 0.11);
+        this.concelhosInterior.put("Ourém", (float) 0.15);
+        this.concelhosInterior.put("Vinhais", (float) 0.14);
+        this.concelhosInterior.put("Vila Real", (float) 0.13);
+        this.concelhosInterior.put("Miranda do Douro", (float) 0.17);
     }
     
     public Admin getAdmin(){
@@ -190,8 +209,6 @@ public class JavaFactura implements Serializable
             f.setAtividade(atividade);
             f.setConfirmado(true);
             f.setValorDeduzido(getValorDeduzido(nifE, atividade, f.getValor(), cc.getFactorEmpresarial(), f.getNifCliente()));
-            System.out.println("Antiga: " + atividadeAntiga);
-            System.out.println("Nova: " + atividade);
             f.addRegisto(new Registo("Atividade Económica alterada", atividadeAntiga, atividade));
         }
         
@@ -233,11 +250,15 @@ public class JavaFactura implements Serializable
         else return null;
     }
     
-    public float getValorDeduzidoAnual(int nifC, int ano){
-        List<Factura> facc = this.getFacturasWithNIF(nifC);
-        float valorTotal =0;
-        for (Factura f: facc) {
-            if (f.getDataDespesa().getYear() == ano) valorTotal+= f.getValorDeduzido();
+    public float getValorDeduzidoAnual(int nifC, int ano) {
+        
+        float valorTotal = 0;
+        
+        if (this.contribuintes.containsKey(nifC)) {
+            
+            List<Factura> facc = this.getFacturasWithNIF(nifC);
+            for (Factura f: facc)
+                if (f.getDataDespesa().getYear() == ano) valorTotal += f.getValorDeduzido(); 
         }
         return valorTotal;
     }
