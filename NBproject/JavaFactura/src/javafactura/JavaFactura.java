@@ -414,23 +414,25 @@ public class JavaFactura implements Serializable
          return faturado;
      }
       
-      public List<Contribuinte> getTop10Contribuintes(){
+      public Map<Contribuinte,Float> getTop10Contribuintes(){
           Map<Contribuinte,Float> topContribuintes= new HashMap<Contribuinte,Float>();
           float contribuicao=0;
           Contribuinte l = null; int ano;
           for (Contribuinte c: this.contribuintes.values()){
-              l = c;
-              ano = LocalDateTime.now().getYear();
-              contribuicao=this.getValorDeduzidoAnual(l.getNif(),ano);
-              topContribuintes.put(l, contribuicao);
+              if (c instanceof ContribuinteIndividual){
+                l = c;
+                ano = LocalDateTime.now().getYear();
+                contribuicao=this.getValorDeduzidoAnual(l.getNif(),ano);
+                topContribuintes.put(l, contribuicao);
+              }
           }
-          HashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
+          LinkedHashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
                                                              .sorted(Entry.comparingByValue())
+                                                             .limit(10)
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
-          
-          return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(10).collect(Collectors.toList());
-      }
-      
+         
+          return topContribuintesOrdenado;
+     }
       public List<Contribuinte> getTopXEmpresasComMaisFacturas(int x){
           Map<Contribuinte,Integer> topEmpresas= new HashMap<Contribuinte,Integer>();
           int facturasCount=0;
@@ -454,7 +456,7 @@ public class JavaFactura implements Serializable
       public Map<Contribuinte,Float>getTopXEmpresasFaturadoras(int x){
           List<Contribuinte> topxEmpresas= this.getTopXEmpresasComMaisFacturas(x);
           Contribuinte l; int ano;
-          Map<Contribuinte,Float> topEmpresas = new HashMap<Contribuinte,Float>();
+          Map<Contribuinte,Float> topEmpresas = new LinkedHashMap<Contribuinte,Float>();
           for(Contribuinte c: topxEmpresas){
               l=c.clone();
               ano = LocalDateTime.now().getYear();
