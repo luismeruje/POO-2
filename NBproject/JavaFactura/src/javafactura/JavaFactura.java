@@ -396,10 +396,11 @@ public class JavaFactura implements Serializable
       public List<Contribuinte> getTop10Contribuintes(){
           Map<Contribuinte,Float> topContribuintes= new HashMap<Contribuinte,Float>();
           float contribuicao=0;
-          Contribuinte l = null;
+          Contribuinte l = null; int ano;
           for (Contribuinte c: this.contribuintes.values()){
               l = c;
-              contribuicao=this.getValorDeduzidoAnual(l.getNif());
+              ano = LocalDateTime.now().getYear();
+              contribuicao=this.getValorDeduzidoAnual(l.getNif(),ano);
               topContribuintes.put(l, contribuicao);
           }
           HashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
@@ -431,11 +432,12 @@ public class JavaFactura implements Serializable
        // verificar se esta por ordem esta...
       public Map<Contribuinte,Float>getTopXEmpresasFaturadoras(int x){
           List<Contribuinte> topxEmpresas= this.getTopXEmpresasComMaisFacturas(x);
-          Contribuinte l;
+          Contribuinte l; int ano;
           Map<Contribuinte,Float> topEmpresas = new HashMap<Contribuinte,Float>();
           for(Contribuinte c: topxEmpresas){
               l=c.clone();
-              float deducoes= this.getValorDeduzidoAnual(l.getNif());
+              ano = LocalDateTime.now().getYear();
+              float deducoes= this.getValorDeduzidoAnual(l.getNif(),ano);
               topEmpresas.put(l, deducoes);
           }
           return topEmpresas;
