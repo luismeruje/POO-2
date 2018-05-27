@@ -186,6 +186,7 @@ public class JavaFactura implements Serializable
             if (atividadesemp.size() == 1) {
                 atividade = atividadesemp.get(0);
                 valorDeduzido = getValorDeduzido(nifEmitente, atividade, valor, coefEmp, nifCliente);
+                confirmado = true;
             }
             else {
                 atividade = -1;
@@ -196,6 +197,7 @@ public class JavaFactura implements Serializable
             f.addRegisto(new Registo("A fatura foi criada.", -1, -1));
 
             ContribuinteColetivo newEmp = (ContribuinteColetivo) this.contribuintes.get(nifEmitente);
+            newEmp.addFactura(id);
             this.facturas.put(id, f);
             Contribuinte c = this.contribuintes.get(nifCliente);
             c.addFactura(id);

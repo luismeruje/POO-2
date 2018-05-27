@@ -64,7 +64,7 @@ public class ModeloTabelaFacturas extends AbstractTableModel{
                     return factura.getDataDespesa();
 
                 case "Atividade económica":
-                    return factura.getAtividade();
+                    return CommonVariables.getString(factura.getAtividade());
 
                 default :
                     return "";
