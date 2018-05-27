@@ -355,7 +355,7 @@ public class JavaFactura implements Serializable
        Factura f;
        for(int i: faccids){
            f = this.facturas.get(i);
-           if ((f.getDataDespesa().compareTo(dataMenor) == 1) && (f.getDataDespesa().compareTo(dataMaior) == -1))
+           if ((f.getDataDespesa().isAfter(dataMenor)) && (f.getDataDespesa().isBefore(dataMaior)))
               facc.add(f);
        }
        return facc;
