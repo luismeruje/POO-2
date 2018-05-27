@@ -444,7 +444,7 @@ public class JavaFactura implements Serializable
               }
           }
           LinkedHashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
-                                                             .sorted(Entry.comparingByValue())
+                                                             .sorted(Entry.comparingByValue(new ComparatorValorDesc()))
                                                              .limit(10)
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
          
