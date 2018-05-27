@@ -19,7 +19,7 @@ public class Factura implements Serializable
     private int atividade; //tipo 
     private float valor;
     private boolean confirmado;
-    private float valorDeduzido; //TODO
+    private float valorDeduzido;
     private List<Registo> registos;
 
     public Factura(int id, int nifEmitente, String designacao, LocalDateTime dataDespesa, int nifCliente, String descricao, int atividade, float valor, boolean confirmado, float valorDeduzido) {
@@ -50,11 +50,11 @@ public class Factura implements Serializable
     }
     
     public List<Registo> getRegistos(){
-        return this.registos;
+        return new ArrayList<>(this.registos);
     }
     
     public void setRegistos(List<Registo> registos){
-        this.registos=registos;
+        this.registos=new ArrayList<>(registos);
     }
     
     public void addRegisto(Registo registo) {

@@ -69,19 +69,19 @@ public class JavaFactura implements Serializable
         if (this.contribuintes.containsKey(nifC)) {
             c = this.contribuintes.get(nifC);
             if(c.getPassword().equals(password))
-                logado = c;
+                logado = c.clone();
         }
             
         return logado;
     }
     
     public Admin loginAdmin(String Password){
-        Admin adminlog = null;
+        Admin admin = null;
         
         if (this.admin.getPassword().equals(Password))
-            adminlog=this.admin;
+            admin=this.admin.clone();
         
-        return adminlog;
+        return admin;
     }
 
     public List<Factura> getFacturasWithNIF(int NIF) {
@@ -92,7 +92,7 @@ public class JavaFactura implements Serializable
        for(int i: faccids){
            f = this.facturas.get(i);
            if(f != null)
-            facc.add(f);
+            facc.add(f.clone());
        }
        
        return facc;
@@ -128,7 +128,7 @@ public class JavaFactura implements Serializable
        for(int i: faccids){
            f = this.facturas.get(i);
            if (!f.getConfirmado())
-              facc.add(f);
+              facc.add(f.clone());
        }
        return facc;
     }
@@ -141,7 +141,7 @@ public class JavaFactura implements Serializable
         for(int i : faccids) {
             f = this.facturas.get(i);
             if (f.getConfirmado())
-                facc.add(f);
+                facc.add(f.clone());
         }
         
         return facc;
@@ -197,10 +197,8 @@ public class JavaFactura implements Serializable
 
             ContribuinteColetivo newEmp = (ContribuinteColetivo) this.contribuintes.get(nifEmitente);
             this.facturas.put(id, f);
-            List<Integer> facturasci = this.contribuintes.get(nifCliente).getFacturas();
-            List<Integer> facturascc = this.contribuintes.get(nifEmitente).getFacturas();
-            facturasci.add(f.getId());
-            facturascc.add(f.getId());
+            Contribuinte c = this.contribuintes.get(nifCliente);
+            c.addFactura(id);
             return newEmp.clone(); 
         }
         
@@ -299,11 +297,7 @@ public class JavaFactura implements Serializable
         ContribuinteColetivo emp;
          
         if (notRegistado = !this.contribuintes.containsKey(nif)){
-            emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome, morada, password, concelho);
-            List <Integer> atividade = emp.getAtividades();
-            
-            for (Integer i : atividades)
-                atividade.add(i);
+            emp = new ContribuinteColetivo(factorEmpresarial, nif, email, nome, morada, password, concelho, atividades);
             
             this.contribuintes.put(nif, emp);
          }
@@ -348,7 +342,7 @@ public class JavaFactura implements Serializable
         for(int i : faccids) {
            f = this.facturas.get(i);
            if ((f.getDataDespesa().isAfter(dataMenor)) && (f.getDataDespesa().isBefore(dataMaior)))
-              facc.add(f);
+              facc.add(f.clone());
         }
         
         return facc;

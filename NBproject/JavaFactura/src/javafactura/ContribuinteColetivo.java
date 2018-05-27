@@ -18,9 +18,9 @@ public class ContribuinteColetivo extends Contribuinte implements Serializable
     private String concelho;
     
 
-    public ContribuinteColetivo(float factorEmpresarial, int nif, String email, String nome, String morada, String password, String concelho) {
+    public ContribuinteColetivo(float factorEmpresarial, int nif, String email, String nome, String morada, String password, String concelho, List<Integer> atividades) {
         super(nif, email, nome, morada, password);
-        this.atividades = new ArrayList<Integer>();
+        this.atividades = new ArrayList<>(atividades);
         this.factorEmpresarial = factorEmpresarial;
         this.concelho = concelho;
     }
@@ -40,7 +40,7 @@ public class ContribuinteColetivo extends Contribuinte implements Serializable
         this.concelho = concelho;
     }
     
-    
+   
     public List<Integer> getAtividades () {
         return new ArrayList<>(this.atividades);
     }

@@ -36,11 +36,11 @@ public class ContribuinteIndividual extends Contribuinte implements Serializable
 
     
     public List<Integer> getNifAgregado(){
-        return this.nifAgregado;
+        return (new ArrayList<>(this.nifAgregado));
     }
 
     public void setNifAgregado(List<Integer> nifAgregado) {
-        this.nifAgregado = new ArrayList<>();
+        this.nifAgregado = new ArrayList<>(nifAgregado);
     }
 
     public float getCoefFiscal() {
@@ -52,7 +52,7 @@ public class ContribuinteIndividual extends Contribuinte implements Serializable
     }
 
     public List<Integer> getAtividades(){
-        return this.atividades;
+        return (new ArrayList<>(this.atividades));
     }
 
     public void setAtividades(List<Integer> atividades) {
