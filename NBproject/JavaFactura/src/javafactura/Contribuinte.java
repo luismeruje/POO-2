@@ -46,6 +46,10 @@ public class Contribuinte implements Serializable
         this.facturas= new ArrayList<> (facturas);
     }
     
+    public void addFactura(int ID){
+        this.facturas.add(ID);
+    }
+    
     public int getNif() {
         return nif;
     }
