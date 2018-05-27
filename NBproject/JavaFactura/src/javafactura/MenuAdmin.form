@@ -33,6 +33,18 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldNumeroEmpresas" min="-2" pref="35" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButtonMaisFaturas" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButton10Contribuintes" alignment="0" pref="815" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jSeparator3" alignment="0" min="-2" pref="847" max="-2" attributes="0"/>
@@ -47,21 +59,8 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton10Contribuintes" max="32767" attributes="0"/>
-                          <Component id="jButtonMaisFaturas" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldNumeroEmpresas" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButtonMaisMontante" pref="815" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,9 +91,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButtonMaisFaturas" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButtonMaisMontante" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -139,8 +136,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton10Contribuintes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Obter os 10 contribuintes que mais gastam"/>
+        <Property name="text" type="java.lang.String" value="Obter os 10 contribuintes que mais gastam no ano presente"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ContribuintesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonMaisFaturas">
       <Properties>
@@ -156,11 +156,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNumeroEmpresas">
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonMaisMontante">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Lista das empresas com mais montante de dedu&#xe7;&#xf5;es fiscais nas despesas registadas"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

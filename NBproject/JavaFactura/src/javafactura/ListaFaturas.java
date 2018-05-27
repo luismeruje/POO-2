@@ -27,7 +27,7 @@ public class ListaFaturas extends javax.swing.JFrame {
         
     }
     
-     public void mostraAnterior(){
+    public void mostraAnterior(){
         returnWindow.setVisible(true);
     }
 

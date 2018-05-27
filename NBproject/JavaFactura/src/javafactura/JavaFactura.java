@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -444,33 +442,39 @@ public class JavaFactura implements Serializable
               }
           }
           LinkedHashMap<Contribuinte,Float> topContribuintesOrdenado = topContribuintes.entrySet().stream()
-                                                             .sorted(Entry.comparingByValue(new ComparatorValorDesc()))
+                                                             .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
                                                              .limit(10)
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
          
           return topContribuintesOrdenado;
      }
-      public List<Contribuinte> getTopXEmpresasComMaisFacturas(int x){
+      public List<Contribuinte> getTopXEmpresasComMaisFacturas(int x) {
           Map<Contribuinte,Integer> topEmpresas= new HashMap<Contribuinte,Integer>();
           int facturasCount=0;
           List<Factura> facturas;
           Contribuinte l = null;
-          for (Contribuinte c: this.contribuintes.values()){
+          
+          for (Contribuinte c: this.contribuintes.values()) {
               if (c instanceof ContribuinteColetivo){
-              l = c.clone();
-              facturas=this.getFacturasWithNIF(l.getNif());
-              facturasCount += facturas.size();
-              topEmpresas.put(l, facturasCount);
+                //l = c.clone();
+                facturasCount = c.getFacturas().size();
+                topEmpresas.put(c, facturasCount);
               }
           }
-          HashMap<Contribuinte,Integer> topContribuintesOrdenado = topEmpresas.entrySet().stream()
-                                                             .sorted(Entry.comparingByValue())
+          
+          LinkedHashMap<Contribuinte,Integer> topContribuintesOrdenado = topEmpresas.entrySet().stream()
+                                                             .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
+                                                             .limit(x)
                                                              .collect(Collectors.toMap(Entry::getKey, Entry::getValue,(e1,e2) -> e1, LinkedHashMap::new));
           
-          return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).limit(x).collect(Collectors.toList());
+          for (Map.Entry<Contribuinte,Integer> entry : topContribuintesOrdenado.entrySet()) 
+            System.out.println("Key = " + entry.getKey() +
+                             ", Value = " + entry.getValue());
+          
+          return topContribuintesOrdenado.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toList());
       }
        // verificar se esta por ordem esta...
-      public Map<Contribuinte,Float>getTopXEmpresasFaturadoras(int x){
+      public Map<Contribuinte,Float> getTopXEmpresasFaturadoras(int x) {
           List<Contribuinte> topxEmpresas= this.getTopXEmpresasComMaisFacturas(x);
           Contribuinte l; int ano;
           Map<Contribuinte,Float> topEmpresas = new LinkedHashMap<Contribuinte,Float>();

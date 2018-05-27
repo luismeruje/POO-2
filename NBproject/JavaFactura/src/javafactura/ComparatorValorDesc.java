@@ -12,8 +12,9 @@ import java.util.Comparator;
  * @author treishy
  */
 public class ComparatorValorDesc implements Comparator<Float> {
-    public int compare(float v1, float v2){
-       
+    
+    @Override
+    public int compare(Float v1, Float v2){
         if(v1 == v2) return 0;
         if(v1 > v2) return -1;
         return 1;

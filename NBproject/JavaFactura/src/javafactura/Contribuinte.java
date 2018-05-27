@@ -35,6 +35,7 @@ public class Contribuinte implements Serializable
         this.nome = c.getNome();
         this.morada = c.getMorada();
         this.password = c.getPassword();
+        this.facturas = c.getFacturas();
     }
     
     public List<Integer> getFacturas(){

@@ -5,7 +5,13 @@
  */
 package javafactura;
 
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,7 +55,6 @@ public class MenuAdmin extends javax.swing.JFrame {
         jButtonMaisFaturas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldNumeroEmpresas = new javax.swing.JTextField();
-        jButtonMaisMontante = new javax.swing.JButton();
 
         jButton1.setText("Terminar sessão");
 
@@ -72,7 +77,12 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton10Contribuintes.setText("Obter os 10 contribuintes que mais gastam");
+        jButton10Contribuintes.setText("Obter os 10 contribuintes que mais gastam no ano presente");
+        jButton10Contribuintes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ContribuintesActionPerformed(evt);
+            }
+        });
 
         jButtonMaisFaturas.setText("Lista das empresas com mais faturas");
         jButtonMaisFaturas.addActionListener(new java.awt.event.ActionListener() {
@@ -83,14 +93,21 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         jLabel2.setText("Número de empresas nas listas:");
 
-        jButtonMaisMontante.setText("Lista das empresas com mais montante de deduções fiscais nas despesas registadas");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNumeroEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonMaisFaturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10Contribuintes, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -102,18 +119,8 @@ public class MenuAdmin extends javax.swing.JFrame {
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonTerminarSessao)
-                                .addGap(40, 40, 40))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton10Contribuintes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonMaisFaturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumeroEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonMaisMontante, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE))))
-                .addGap(27, 27, 27))
+                                .addGap(40, 40, 40)))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,16 +144,38 @@ public class MenuAdmin extends javax.swing.JFrame {
                     .addComponent(jTextFieldNumeroEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonMaisFaturas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonMaisMontante, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
+                .addGap(153, 153, 153))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMaisFaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMaisFaturasActionPerformed
-        // TODO add your handling code here:
+        Integer contagemEmpresas;
+        
+        try {
+            contagemEmpresas = Integer.parseInt(jTextFieldNumeroEmpresas.getText());
+        }
+        catch(NumberFormatException e){
+            contagemEmpresas = new Integer(-1);
+        }
+        
+        if (contagemEmpresas != -1) {
+            Map <Contribuinte,Float> contribuintes = javaFactura.getTopXEmpresasFaturadoras(contagemEmpresas);
+            JFrame novoUserFrame = new ListaContribuintes(this, contribuintes, new String[] {"NIF", "Nome", "Morada", "Email", "Montante"});
+            novoUserFrame.addWindowListener(new WindowAdapter()
+                            {
+                                public void windowClosing(WindowEvent e)
+                                {
+                                   ((ListaContribuintes)e.getWindow()).mostraAnterior();
+                                }
+                            });
+            this.setVisible(false);
+            novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            novoUserFrame.setVisible(true);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Número de empresas inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButtonMaisFaturasActionPerformed
 
     private void jButtonTerminarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTerminarSessaoActionPerformed
@@ -154,12 +183,26 @@ public class MenuAdmin extends javax.swing.JFrame {
         returnWindow.setVisible(true);
     }//GEN-LAST:event_jButtonTerminarSessaoActionPerformed
 
+    private void jButton10ContribuintesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ContribuintesActionPerformed
+        Map <Contribuinte,Float> contribuintes = javaFactura.getTop10Contribuintes();
+        JFrame novoUserFrame = new ListaContribuintes(this, contribuintes, new String[] {"NIF", "Nome", "Morada", "Email", "Despesa"});
+        novoUserFrame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent e)
+                            {
+                               ((ListaContribuintes)e.getWindow()).mostraAnterior();
+                            }
+                        });
+        this.setVisible(false);
+        novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        novoUserFrame.setVisible(true);
+    }//GEN-LAST:event_jButton10ContribuintesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10Contribuintes;
     private javax.swing.JButton jButtonMaisFaturas;
-    private javax.swing.JButton jButtonMaisMontante;
     private javax.swing.JButton jButtonTerminarSessao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
