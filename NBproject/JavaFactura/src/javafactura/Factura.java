@@ -33,6 +33,7 @@ public class Factura implements Serializable
         this.valor = valor;
         this.confirmado = confirmado;
         this.valorDeduzido = valorDeduzido;
+        this.registos = new ArrayList<>();
     }
     
     public Factura(Factura f){

@@ -19,61 +19,66 @@ public class ModeloTabelaFacturas extends AbstractTableModel{
     public ModeloTabelaFacturas(List<Factura> facturas){
         this.facturas = facturas;
     }
+    
+    public ModeloTabelaFacturas(List<Factura> facturas, String[] cabecalhoArray){
+        this.cabecalhoArray = cabecalhoArray;
+        this.facturas = facturas;
+    }
  
     @Override
     public int getColumnCount() {
-        return 7;
+        return this.cabecalhoArray.length;
     }
  
   
  
-@Override
-public int getRowCount() {
-    return facturas.size();
-}
- 
-// this method is called to set the value of each cell
-@Override
-public Object getValueAt(int linha, int coluna) {
-    Factura factura = null;
-    try{
-        factura= facturas.get(linha);
-        switch (coluna) {
-
-            case 0:
-                return factura.getId();
-
-            case 1:
-                return factura.getNifCliente();
-
-            case 2:
-                return factura.getNifEmitente();
-            
-            case 3:
-                return factura.getValor();
-
-            case 4:
-                return factura.getValorDeduzido();
-
-            case 5:
-                return factura.getDataDespesa();
-
-            case 6:
-                return factura.getAtividade();
-
-            default :
-                return "";
-        }
-    } catch(IndexOutOfBoundsException e){
-        return "";
+    @Override
+    public int getRowCount() {
+        return facturas.size();
     }
+ 
+    // this method is called to set the value of each cell
+    @Override
+    public Object getValueAt(int linha, int coluna) {
+        Factura factura = null;
+        try{
+            factura = facturas.get(linha);
+            switch (this.cabecalhoArray[coluna]) {
 
-}
+                case "ID":
+                    return factura.getId();
+
+                case "NIF do cliente":
+                    return factura.getNifCliente();
+
+                case "NIF do emissor":
+                    return factura.getNifEmitente();
+
+                case "Valor da despesa":
+                    return factura.getValor();
+
+                case "Valor deduzido":
+                    return factura.getValorDeduzido();
+
+                case "Data":
+                    return factura.getDataDespesa();
+
+                case "Atividade económica":
+                    return factura.getAtividade();
+
+                default :
+                    return "";
+            }
+        } catch(IndexOutOfBoundsException e){
+            return "";
+        }
+
+    }
  
  
- //This method will be used to display the name of columns
-public String getColumnName(int col) {
-    return cabecalhoArray[col];
-}
+    //This method will be used to display the name of columns
+    public String getColumnName(int col) {
+        return cabecalhoArray[col];
+    }
 }
 

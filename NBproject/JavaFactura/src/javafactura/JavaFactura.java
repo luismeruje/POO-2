@@ -159,6 +159,18 @@ public class JavaFactura implements Serializable
        return facc;
     }
     
+    public List<Factura> getFacturasConfirmadas(int NIF){
+       List<Factura> facc = new ArrayList<Factura>();
+       List<Integer> faccids = this.contribuintes.get(NIF).getFacturas();
+       Factura f;
+       for(int i: faccids){
+           f = this.facturas.get(i);
+           if (f.getConfirmado())
+              facc.add(f);
+       }
+       return facc;
+    }
+    
     public void ValidarMovimento(Factura f){
         f.setConfirmado(true);
     }
@@ -167,15 +179,19 @@ public class JavaFactura implements Serializable
         boolean flag = false;
         Factura f = this.facturas.get(idFactura);
         int nifE = f.getNifEmitente();
+        Registo registo;
         
         ContribuinteColetivo cc = (ContribuinteColetivo) this.contribuintes.get(nifE);
         List<Integer> atividades = cc.getAtividades();
         
-        if(atividades.contains(atividade)){
+        if (atividades.contains(atividade)) {
             flag = true;
             int atividadeAntiga = f.getAtividade();
             f.setAtividade(atividade);
+            f.setConfirmado(true);
             f.setValorDeduzido(getValorDeduzido(nifE, atividade, f.getValor(), cc.getFactorEmpresarial(), f.getNifCliente()));
+            System.out.println("Antiga: " + atividadeAntiga);
+            System.out.println("Nova: " + atividade);
             f.addRegisto(new Registo("Atividade Económica alterada", atividadeAntiga, atividade));
         }
         
@@ -204,7 +220,7 @@ public class JavaFactura implements Serializable
                 }
             Factura f = new Factura(id,nifEmitente,designacao,dataDespesa,nifCliente, descricao, atividade,
                                     valor, confirmado, valorDeduzido);
-
+            f.addRegisto(new Registo("A fatura foi criada.", -1, -1));
 
             ContribuinteColetivo newEmp= (ContribuinteColetivo) this.contribuintes.get(nifEmitente);
             this.facturas.put(id,f);

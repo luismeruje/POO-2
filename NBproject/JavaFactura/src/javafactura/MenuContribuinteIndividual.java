@@ -6,7 +6,10 @@
 package javafactura;
 
 import java.awt.event.WindowEvent;
+import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -17,6 +20,7 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
     Login returnWindow;
     ContribuinteIndividual contr;
     DefaultListModel<Factura> model = new DefaultListModel();
+    List<Factura> facturasConfirmadas, facturasValidar;
     /**
      * Creates new form MenuContribuinteIndividual
      */
@@ -26,7 +30,10 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         this.returnWindow = returnWindow;
         this.setLocationRelativeTo(null);
         this.contr = contr;
-        //TableFaturas.setModel(model);
+        this.facturasConfirmadas = javaFactura.getFacturasConfirmadas(contr.getNif());
+        jTableFaturas.setModel(new ModeloTabelaFacturas(facturasConfirmadas, new String[]{"ID", "NIF do emissor", "Valor da despesa", "Valor deduzido", "Atividade económica"}));
+        this.facturasValidar = javaFactura.getFacturasPorConfirmar(contr.getNif());
+        jTableFaturasPorValidar.setModel(new ModeloTabelaFacturas(facturasValidar, new String[]{"ID", "NIF do emissor", "Valor da despesa"}));
     }
 
     /**
@@ -44,16 +51,16 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         ButtonTerminarSessao = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableFaturas = new javax.swing.JTable();
+        jTableFaturas = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TableFaturasPorValidar = new javax.swing.JTable();
+        jTableFaturasPorValidar = new javax.swing.JTable();
         ButtonAlterarAtividadeEconomica = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         ComboBoxAno = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        ComboBoxAtividadeEconomica = new javax.swing.JComboBox<>();
+        jComboBoxAtividadeEconomica = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +83,7 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
 
         jLabel1.setText("Faturas em seu nome:");
 
-        TableFaturas.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFaturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -92,11 +99,11 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TableFaturas);
+        jScrollPane1.setViewportView(jTableFaturas);
 
         jLabel3.setText("Faturas por validar:");
 
-        TableFaturasPorValidar.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFaturasPorValidar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -112,9 +119,14 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TableFaturasPorValidar);
+        jScrollPane2.setViewportView(jTableFaturasPorValidar);
 
         ButtonAlterarAtividadeEconomica.setText("Alterar atividade económica");
+        ButtonAlterarAtividadeEconomica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAlterarAtividadeEconomicaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Montante de dedução fiscal acumulado por si e pelo agregado familiar no ano");
 
@@ -126,7 +138,7 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jTextPane1);
 
-        ComboBoxAtividadeEconomica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restauração", "Habitação", "Despesas Familiares", "Educação", "Saúde" }));
+        jComboBoxAtividadeEconomica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restauração", "Habitação", "Despesas Familiares", "Educação", "Saúde" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,19 +158,16 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(47, 47, 47)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel3)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(41, 41, 41)
                                         .addComponent(ButtonAlterarAtividadeEconomica)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(12, 12, 12))
+                                        .addComponent(jComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -197,7 +206,7 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ButtonAlterarAtividadeEconomica)
-                            .addComponent(ComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBoxAtividadeEconomica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +219,19 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void updateTables() {
+        this.facturasConfirmadas = javaFactura.getFacturasConfirmadas(this.contr.getNif());
+        this.facturasValidar = javaFactura.getFacturasPorConfirmar(this.contr.getNif());
+        jTableFaturas.setModel(new ModeloTabelaFacturas(facturasConfirmadas, new String[]{"ID", "NIF do emissor", "Valor da despesa", "Valor deduzido", "Atividade económica"}));
+        this.facturasValidar = javaFactura.getFacturasPorConfirmar(contr.getNif());
+        jTableFaturasPorValidar.setModel(new ModeloTabelaFacturas(facturasValidar, new String[]{"ID", "NIF do emissor", "Valor da despesa"}));
+    }
+    
+    public void mostraAnterior(){
+        returnWindow.setVisible(true);
+    }
+    
     private void ComboBoxAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBoxAnoActionPerformed
@@ -220,15 +241,45 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
         returnWindow.setVisible(true);
     }//GEN-LAST:event_ButtonTerminarSessaoActionPerformed
 
+    private void ButtonAlterarAtividadeEconomicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAlterarAtividadeEconomicaActionPerformed
+        int linhaValidar = jTableFaturasPorValidar.getSelectedRow();
+        int linhaConfirmada = jTableFaturas.getSelectedRow();
+        
+        if (linhaValidar != -1 && linhaConfirmada != -1)
+            JOptionPane.showMessageDialog(this, "Não é possível alterar faturas de tabelas diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+        
+        else if (linhaValidar == -1 && linhaConfirmada == -1)
+            JOptionPane.showMessageDialog(this, "É necessário selecionar uma fatura.", "Erro", JOptionPane.ERROR_MESSAGE);
+        
+        else {
+            int atividadeEconomica = CommonVariables.getInt((String) jComboBoxAtividadeEconomica.getSelectedItem());
+            int faturaID;
+            
+            if (linhaValidar != -1) {
+                faturaID = (int) jTableFaturasPorValidar.getValueAt(linhaValidar, 0);
+                
+                if (this.javaFactura.associarFacturaAtividade(faturaID, atividadeEconomica))
+                    this.updateTables();
+                else
+                    JOptionPane.showMessageDialog(this, "Não é possível associar a atividade à fatura selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);        
+            }
+            else {
+                faturaID = (int) jTableFaturas.getValueAt(linhaConfirmada, 0);
+                if (this.javaFactura.associarFacturaAtividade(faturaID, atividadeEconomica))
+                    ((AbstractTableModel) jTableFaturas.getModel()).fireTableDataChanged();
+                else
+                    JOptionPane.showMessageDialog(this, "Não é possível associar a atividade à fatura selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);      
+            }
+        }
+    }//GEN-LAST:event_ButtonAlterarAtividadeEconomicaActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonAlterarAtividadeEconomica;
     private javax.swing.JButton ButtonTerminarSessao;
     private javax.swing.JComboBox<String> ComboBoxAno;
-    private javax.swing.JComboBox<String> ComboBoxAtividadeEconomica;
-    private javax.swing.JTable TableFaturas;
-    private javax.swing.JTable TableFaturasPorValidar;
+    private javax.swing.JComboBox<String> jComboBoxAtividadeEconomica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -238,6 +289,8 @@ public class MenuContribuinteIndividual extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTable jTableFaturas;
+    private javax.swing.JTable jTableFaturasPorValidar;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

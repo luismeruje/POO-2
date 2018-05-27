@@ -225,7 +225,7 @@ public class Login extends javax.swing.JFrame {
                         {
                             public void windowClosing(WindowEvent e)
                             {
-                               //((MenuContribuinteIndividual)e.getWindow()).mostraAnterior();
+                               ((MenuContribuinteIndividual)e.getWindow()).mostraAnterior();
                             }
                         });
                         this.setVisible(false);
