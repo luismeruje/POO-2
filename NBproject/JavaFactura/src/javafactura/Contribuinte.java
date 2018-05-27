@@ -39,11 +39,11 @@ public class Contribuinte implements Serializable
     }
     
     public List<Integer> getFacturas(){
-        return this.facturas;
+        return new ArrayList<>(this.facturas);
     }
     
     public void setFacturas(List<Integer> facturas){
-        this.facturas= facturas;
+        this.facturas= new ArrayList<> (facturas);
     }
     
     public int getNif() {
@@ -86,16 +86,18 @@ public class Contribuinte implements Serializable
         this.password = password;
     }
     
+    @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("NIF: "); sb.append(this.nif + "\n");
-        sb.append("Email: "); sb.append(this.email+ "\n");
-        sb.append("Nome: "); sb.append(this.nome + "\n");
-        sb.append("Morada: ");sb.append(this.morada + "\n");
+        sb.append("NIF: "); sb.append(this.nif); sb.append("\n");
+        sb.append("Email: "); sb.append(this.email);sb.append("\n");
+        sb.append("Nome: "); sb.append(this.nome);sb.append("\n");
+        sb.append("Morada: ");sb.append(this.morada);sb.append("\n");
         sb.append("Password: "); sb.append (this.password);
         return sb.toString();
     }
     
+    @Override
     public boolean equals(Object o){
         if (this == o) 
             return true;
@@ -103,10 +105,10 @@ public class Contribuinte implements Serializable
         if ((o==null) || (this.getClass() != o.getClass())) 
             return false;
         Contribuinte cont = (Contribuinte) o;
-        return (this.nif == cont.getNif() && this.password.equals(cont.getPassword()) 
-                && this.email.equals(cont.getEmail()) && this.nome.equals(cont.getNome()) 
-                && this.morada.equals(cont.getMorada()));
+        return (this.nif == cont.getNif());
     }
+    
+    @Override
     public Contribuinte clone(){
          return new Contribuinte(this);
      }

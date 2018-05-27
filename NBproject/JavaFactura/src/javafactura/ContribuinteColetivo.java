@@ -27,7 +27,7 @@ public class ContribuinteColetivo extends Contribuinte implements Serializable
     
     public ContribuinteColetivo(ContribuinteColetivo emp){
         super(emp);
-        this.atividades= emp.getAtividades(); // confirm
+        this.atividades= emp.getAtividades(); 
         this.factorEmpresarial = emp.getFactorEmpresarial();
         this.concelho = emp.getConcelho();
     }
@@ -42,21 +42,12 @@ public class ContribuinteColetivo extends Contribuinte implements Serializable
     
     
     public List<Integer> getAtividades () {
-        return this.atividades;
+        return new ArrayList<>(this.atividades);
     }
-    public int getAtividade(int atividade) {
-        int activity=-1;
-        for(int i=0;i<atividades.size();i++){
-            if(atividades.get(i)== atividade){
-                activity = atividades.get(i);
-                i = atividades.size();
-            }
-        }
-        return activity;
-    }
+    
 
-    public void setAtividade(int atividade) {
-        this.atividades.add(atividade);
+    public boolean containsAtividade(int atividade) {
+        return atividades.contains(atividade);
     }
 
     public float getFactorEmpresarial() {

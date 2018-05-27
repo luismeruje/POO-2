@@ -12,37 +12,35 @@ import java.util.List;
  */
 public class ContribuinteIndividual extends Contribuinte implements Serializable
 {
-    // instance variables - replace the example below with your own
-    private List<Integer> nifAgregado; //nifFilhos
+    
+    private List<Integer> nifAgregado; 
     private int nrFilhos;
     private float coefFiscal;
     private List<Integer> atividades;
 
     
-    public ContribuinteIndividual(float coefFiscal,int nif, String email, String nome, String morada, String password, int nrFilhos) {
+    public ContribuinteIndividual(float coefFiscal,int nif, String email, String nome, String morada, String password, int nrFilhos, List<Integer> nifAgregado, List<Integer> atividades) {
         super(nif, email, nome, morada, password);
-        this.nifAgregado = new ArrayList<>();
+        this.nifAgregado = new ArrayList<>(nifAgregado);
         this.coefFiscal = coefFiscal;
-        this.atividades = new ArrayList<>();
+        this.atividades = new ArrayList<>(atividades);
         this.nrFilhos=nrFilhos;
     }
     
     public ContribuinteIndividual(ContribuinteIndividual i){
         super(i);
-        this.nifAgregado=i.getAgregadoFamiliar();
+        this.nifAgregado=i.getNifAgregado();
         this.coefFiscal= i.getCoefFiscal();
         this.atividades = i.getAtividades();
     }
 
     
-    
-   //existsAgregado?
-    public List<Integer> getAgregadoFamiliar(){
+    public List<Integer> getNifAgregado(){
         return this.nifAgregado;
     }
 
-    public void setAgregado(Integer agregado) {
-        this.nifAgregado.add(agregado);
+    public void setNifAgregado(List<Integer> nifAgregado) {
+        this.nifAgregado = new ArrayList<>();
     }
 
     public float getCoefFiscal() {
@@ -57,8 +55,8 @@ public class ContribuinteIndividual extends Contribuinte implements Serializable
         return this.atividades;
     }
 
-    public void setAtividade(Integer atividade) {
-        this.atividades.add(atividade);
+    public void setAtividades(List<Integer> atividades) {
+        this.atividades = new ArrayList<>(atividades);
     }
 
     public int getNrFilhos() {
@@ -72,9 +70,10 @@ public class ContribuinteIndividual extends Contribuinte implements Serializable
     
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        sb.append("Nif: "); sb.append(nif);
         sb.append("Agregado familiar: \n");
-        for(Integer agre: this.nifAgregado)
-            sb.append(agre + "\n");
+        for(Integer nif: this.nifAgregado)
+            sb.append(nif + "\n");
         
         sb.append("Coeficiente Fiscal: "); sb.append(this.coefFiscal);
         sb.append("Atividades : \n");
@@ -82,19 +81,20 @@ public class ContribuinteIndividual extends Contribuinte implements Serializable
             sb.append(ati + "\n");
         return sb.toString();
     }
+    
+    @Override
     public boolean equals(Object o){
         if (this == o) 
             return true;
         
         if ((o==null) || (this.getClass() != o.getClass())) 
             return false;
-        ContribuinteIndividual ind = (ContribuinteIndividual) o;
-        return (this.nifAgregado.equals(ind.getAgregadoFamiliar()) && this.coefFiscal == ind.getCoefFiscal() 
-                && this.atividades.equals(ind.getAtividades())
-                ) ;
+        ContribuinteIndividual contr = (ContribuinteIndividual) o;
+        return (this.nif == contr.getNif());
         
     }
     
+    @Override
     public ContribuinteIndividual clone(){
          return new ContribuinteIndividual(this);
      }

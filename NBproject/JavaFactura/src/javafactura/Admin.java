@@ -32,7 +32,7 @@ public class Admin implements Serializable
     
     @Override
     public String toString(){
-        return ("Password: " + password);
+        return ("Admin with password: " + password);
     } 
     
      public boolean equals(Object o){

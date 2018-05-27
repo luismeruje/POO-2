@@ -7,10 +7,6 @@ package javafactura;
 
 import java.util.Comparator;
 
-/**
- *
- * @author treishy
- */
 public class ComparatorFacturasValor implements Comparator<Factura> {
     public int compare(Factura f1, Factura f2){
         float despesa1 = f1.getValor();

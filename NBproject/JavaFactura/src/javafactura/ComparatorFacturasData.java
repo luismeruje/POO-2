@@ -3,10 +3,7 @@ package javafactura;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
-/**
- *
- * @author treishy
- */
+
 public class ComparatorFacturasData implements Comparator<Factura> {
     public int compare(Factura f1, Factura f2){
         LocalDateTime date1 = f1.getDataDespesa();

@@ -7,10 +7,7 @@ package javafactura;
 
 import java.io.Serializable;
 
-/**
- *
- * @author treishy
- */
+
 public class CommonVariables {
     public static final int RESTAURACAO = 1;
     public static final int EDUCACAO = 2;
@@ -32,6 +29,23 @@ public class CommonVariables {
                 return 5;
             default:
                 return -1;
+        }
+    }
+    
+    public static String getString(int variable){
+        switch(variable){
+            case 1:
+                return "Restauração";
+            case 2:
+                return "Educação";
+            case 3:
+                return "Saúde";
+            case 4:
+                return "Habitação";
+            case 5:
+                return "Despesas Familiares";
+            default:
+                return "";
         }
     }
 }
