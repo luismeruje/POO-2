@@ -163,9 +163,11 @@ public class JavaFactura implements Serializable
         f.setConfirmado(true);
     }
     
-    public boolean associarFacturaAtividade(Factura f, int atividade){
+    public boolean associarFacturaAtividade(int idFactura, int atividade){
         boolean flag = false;
+        Factura f = this.facturas.get(idFactura);
         int nifE = f.getNifEmitente();
+        
         ContribuinteColetivo cc = (ContribuinteColetivo) this.contribuintes.get(nifE);
         List<Integer> atividades = cc.getAtividades();
         
