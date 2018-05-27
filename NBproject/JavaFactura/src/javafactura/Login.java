@@ -5,7 +5,7 @@
  */
 package javafactura;
 
-import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,9 +19,12 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login(JavaFactura javaFactura) {
+        
         initComponents();
         this.javaFactura = javaFactura;
         this.setLocationRelativeTo(null);
+        
+        
     }
 
     /**
@@ -235,7 +238,21 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        new Login(new JavaFactura()).setVisible(true);
+        JavaFactura javaFactura;
+        try{
+            javaFactura = JavaFactura.carregaEstado("estado.ml");
+        } catch(Exception e){
+            javaFactura = new JavaFactura();
+            System.out.println( "Erro ao processar o ficheiro estado.ml, o ficheiro não foi carregado.");
+        }
+       
+        new Login(javaFactura).setVisible(true);
+        try{
+            javaFactura.guardaEstado("estado.ml");
+        } catch(Exception e){
+            System.out.println( "Erro ao guardar o estado da aplicação. Os dados poderão ter ficado corrompidos.");
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
