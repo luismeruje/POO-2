@@ -27,7 +27,11 @@ public class RegistarContribuinteColetivo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.returnPage = returnPage;
     }
-
+    
+    public void mostraAnterior(){
+        returnPage.setVisible(true);
+    }
+    /**
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

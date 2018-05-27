@@ -26,6 +26,10 @@ public class ListaFaturas extends javax.swing.JFrame {
         jTableListaFaturas.setModel(new ModeloTabelaFacturas(facturas));
         
     }
+    
+     public void mostraAnterior(){
+        returnWindow.setVisible(true);
+    }
 
     
     /**

@@ -5,7 +5,8 @@
  */
 package javafactura;
 
-import java.io.FileNotFoundException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -25,6 +26,15 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         
+    }
+    
+    public void guardaEstado(){
+        try{
+            System.out.println("Saving...");
+            javaFactura.guardaEstado("estado.ml");
+        } catch(Exception ex){
+            System.out.println( "Erro ao guardar o estado da aplicação. Os dados poderão ter ficado corrompidos.");
+        }
     }
 
     /**
@@ -179,6 +189,13 @@ public class Login extends javax.swing.JFrame {
             Admin admin;
             if((admin = javaFactura.loginAdmin(jPasswordField.getText())) != null){
                 JFrame novoUserFrame = new MenuAdmin(javaFactura,this,admin);
+                novoUserFrame.addWindowListener(new WindowAdapter()
+                {
+                    public void windowClosing(WindowEvent e)
+                    {
+                       ((MenuAdmin)e.getWindow()).mostraAnterior();
+                    }
+                });
                 this.setVisible(false);
                 novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 novoUserFrame.setVisible(true);
@@ -191,12 +208,26 @@ public class Login extends javax.swing.JFrame {
                 if(contr != null){
                     if(contr instanceof ContribuinteColetivo){
                         JFrame novoUserFrame = new MenuContribuinteColetivo(javaFactura,this,(ContribuinteColetivo)contr);
+                        novoUserFrame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent e)
+                            {
+                               ((MenuContribuinteColetivo)e.getWindow()).mostraAnterior();
+                            }
+                        });
                         this.setVisible(false);
                         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         novoUserFrame.setVisible(true);
                     }
                     else if(contr instanceof ContribuinteIndividual){
                         JFrame novoUserFrame = new MenuContribuinteIndividual(javaFactura,this,(ContribuinteIndividual)contr);
+                        novoUserFrame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent e)
+                            {
+                               //((MenuContribuinteIndividual)e.getWindow()).mostraAnterior();
+                            }
+                        });
                         this.setVisible(false);
                         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         novoUserFrame.setVisible(true);
@@ -221,6 +252,13 @@ public class Login extends javax.swing.JFrame {
     private void registarContribuinteIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registarContribuinteIndividualActionPerformed
         JFrame novoUserFrame = new RegistarContribuinteIndividual(javaFactura,this);
         this.setVisible(false);
+        novoUserFrame.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+               ((RegistarContribuinteIndividual)e.getWindow()).mostraAnterior();
+            }
+        });
         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         novoUserFrame.setVisible(true);
         
@@ -228,6 +266,13 @@ public class Login extends javax.swing.JFrame {
 
     private void registarContribuinteColetivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registarContribuinteColetivoActionPerformed
         JFrame novoUserFrame = new RegistarContribuinteColetivo(javaFactura,this);
+        novoUserFrame.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+               ((RegistarContribuinteColetivo)e.getWindow()).mostraAnterior();
+            }
+        });
         this.setVisible(false);
         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         novoUserFrame.setVisible(true);
@@ -246,12 +291,16 @@ public class Login extends javax.swing.JFrame {
             System.out.println( "Erro ao processar o ficheiro estado.ml, o ficheiro não foi carregado.");
         }
        
-        new Login(javaFactura).setVisible(true);
-        try{
-            javaFactura.guardaEstado("estado.ml");
-        } catch(Exception e){
-            System.out.println( "Erro ao guardar o estado da aplicação. Os dados poderão ter ficado corrompidos.");
-        }
+        Login login = new Login(javaFactura);
+        login.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+               ((Login)e.getWindow()).guardaEstado();
+            }
+        });
+        
+        login.setVisible(true);
         
     }
 

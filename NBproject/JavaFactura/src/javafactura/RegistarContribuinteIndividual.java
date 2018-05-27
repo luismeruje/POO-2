@@ -29,6 +29,11 @@ public class RegistarContribuinteIndividual extends javax.swing.JFrame {
         this.returnPage = returnPage;
         listNIFAgregadoFamiliar.setModel(model);
     }
+    
+    public void mostraAnterior(){
+        returnPage.setVisible(true);
+    }
+    /**
 
     /**
      * This method is called from within the constructor to initialize the form.

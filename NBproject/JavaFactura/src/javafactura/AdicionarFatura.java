@@ -26,6 +26,10 @@ public class AdicionarFatura extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.contr = contr;
     }
+    
+     public void mostraAnterior(){
+        returnWindow.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

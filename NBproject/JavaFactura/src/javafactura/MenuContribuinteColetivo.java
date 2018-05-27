@@ -5,6 +5,7 @@
  */
 package javafactura;
 
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JFrame;
@@ -30,6 +31,10 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
 
     public void setContr(ContribuinteColetivo contr){
         this.contr = contr;
+    }
+    
+    public void mostraAnterior(){
+        returnWindow.setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -390,6 +395,13 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         List<Factura> facturas = javaFactura.getFacturasWithNIF(contr.getNif());
         facturas.sort(new ComparatorFacturasData());
         JFrame novoUserFrame = new ListaFaturas(this,contr,facturas);
+        novoUserFrame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent e)
+                            {
+                               ((ListaFaturas)e.getWindow()).mostraAnterior();
+                            }
+                        });
         this.setVisible(false);
         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         novoUserFrame.setVisible(true);
@@ -397,6 +409,13 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
 
     private void jButtonAdicionarFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarFaturaActionPerformed
         JFrame novoUserFrame = new AdicionarFatura(javaFactura,this,contr);
+        novoUserFrame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent e)
+                            {
+                               ((AdicionarFatura)e.getWindow()).mostraAnterior();
+                            }
+                        });
         this.setVisible(false);
         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         novoUserFrame.setVisible(true);
@@ -427,6 +446,13 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         List<Factura> facturas = javaFactura.getFacturasWithNIF(contr.getNif());
         facturas.sort(new ComparatorFacturasValor());
         JFrame novoUserFrame = new ListaFaturas(this,contr,facturas);
+        novoUserFrame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent e)
+                            {
+                               ((ListaFaturas)e.getWindow()).mostraAnterior();
+                            }
+                        });
         this.setVisible(false);
         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         novoUserFrame.setVisible(true);

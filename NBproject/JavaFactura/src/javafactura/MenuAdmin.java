@@ -25,6 +25,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.returnWindow = returnWindow;
     }
+    
+    public void mostraAnterior(){
+        returnWindow.setVisible(true);
+    }
+    /**
 
     /**
      * This method is called from within the constructor to initialize the form.
