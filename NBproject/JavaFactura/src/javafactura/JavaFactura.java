@@ -233,11 +233,11 @@ public class JavaFactura implements Serializable
         else return null;
     }
     
-    public float getValorDeduzidoAnual(int nifC){
+    public float getValorDeduzidoAnual(int nifC, int ano){
         List<Factura> facc = this.getFacturasWithNIF(nifC);
         float valorTotal =0;
         for (Factura f: facc) {
-            valorTotal+= f.getValorDeduzido();
+            if (f.getDataDespesa().getYear() == ano) valorTotal+= f.getValorDeduzido();
         }
         return valorTotal;
     }
@@ -337,13 +337,13 @@ public class JavaFactura implements Serializable
          return notRegistado;
      }
      
-     public float getDeduzidoAgregado(ContribuinteIndividual ind){
+     public float getDeduzidoAgregado(ContribuinteIndividual ind, int ano){
          int nif = ind.getNif();
          List<Integer> agregado = ind.getAgregadoFamiliar();
          float deduzido=0;
-         deduzido += this.getValorDeduzidoAnual(nif);
+         deduzido += this.getValorDeduzidoAnual(nif,ano);
          for (Integer i: agregado){
-             deduzido += getValorDeduzidoAnual(i);
+             deduzido += getValorDeduzidoAnual(i,ano);
          }
          return deduzido;
      }
