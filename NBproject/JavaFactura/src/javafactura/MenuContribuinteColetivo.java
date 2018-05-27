@@ -7,8 +7,11 @@ package javafactura;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -55,11 +58,11 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         jButtonValorDespesa = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldNIF = new javax.swing.JTextField();
+        jTextFieldNIFCliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldListaData1 = new javax.swing.JTextField();
+        jTextFieldDia = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldListaData2 = new javax.swing.JTextField();
+        jTextFieldDia2 = new javax.swing.JTextField();
         jButtonIntervaloDatas = new javax.swing.JButton();
         jButtonValorDecrescente = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -70,23 +73,23 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jButtonAdicionarFatura = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldMes = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldAno = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldMes2 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextFieldListaData3 = new javax.swing.JTextField();
+        jTextFieldAno2 = new javax.swing.JTextField();
+        jTextFieldDia3 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldMes3 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextFieldListaData4 = new javax.swing.JTextField();
+        jTextFieldAno3 = new javax.swing.JTextField();
+        jTextFieldDia4 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldMes4 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldAno4 = new javax.swing.JTextField();
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -130,19 +133,34 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
 
         jLabel5.setText("entre");
 
-        jTextFieldListaData1.setText("DD");
+        jTextFieldDia.setText("DD");
 
         jLabel6.setText("e");
 
-        jTextFieldListaData2.setText("DD");
+        jTextFieldDia2.setText("DD");
 
         jButtonIntervaloDatas.setText("intervalo de datas");
+        jButtonIntervaloDatas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIntervaloDatasActionPerformed(evt);
+            }
+        });
 
         jButtonValorDecrescente.setText("valor decrescente de despesa");
+        jButtonValorDecrescente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValorDecrescenteActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("por:");
 
         jButtonTotalFaturado.setText("Total Faturado");
+        jButtonTotalFaturado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTotalFaturadoActionPerformed(evt);
+            }
+        });
 
         jSeparator4.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
@@ -163,57 +181,57 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
 
         jLabel10.setText("/");
 
-        jTextField1.setText("MM");
+        jTextFieldMes.setText("MM");
 
         jLabel11.setText("/");
 
-        jTextField2.setText("AAAA");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAno.setText("AAAA");
+        jTextFieldAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextFieldAnoActionPerformed(evt);
             }
         });
 
         jLabel12.setText("/");
 
-        jTextField3.setText("MM");
+        jTextFieldMes2.setText("MM");
 
         jLabel13.setText("/");
 
-        jTextField4.setText("AAAA");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAno2.setText("AAAA");
+        jTextFieldAno2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jTextFieldAno2ActionPerformed(evt);
             }
         });
 
-        jTextFieldListaData3.setText("DD");
+        jTextFieldDia3.setText("DD");
 
         jLabel14.setText("/");
 
-        jTextField5.setText("MM");
+        jTextFieldMes3.setText("MM");
 
         jLabel15.setText("/");
 
-        jTextField6.setText("AAAA");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAno3.setText("AAAA");
+        jTextFieldAno3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                jTextFieldAno3ActionPerformed(evt);
             }
         });
 
-        jTextFieldListaData4.setText("DD");
+        jTextFieldDia4.setText("DD");
 
         jLabel16.setText("/");
 
-        jTextField7.setText("MM");
+        jTextFieldMes4.setText("MM");
 
         jLabel17.setText("/");
 
-        jTextField8.setText("AAAA");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAno4.setText("AAAA");
+        jTextFieldAno4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                jTextFieldAno4ActionPerformed(evt);
             }
         });
 
@@ -249,31 +267,31 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldListaData3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldDia3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldMes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldAno3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldListaData4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldDia4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldMes4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldAno4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldNIFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7))
                             .addComponent(jLabel3)
@@ -293,27 +311,27 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldListaData1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldListaData2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDia2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldMes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldAno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -345,23 +363,23 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldNIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNIFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldListaData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldListaData2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonIntervaloDatas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonValorDecrescente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -369,23 +387,23 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldListaData3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel14)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldMes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldAno3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldListaData4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel16)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldMes4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel17)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldAno4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonTotalFaturado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -426,21 +444,21 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         returnWindow.setVisible(true);
     }//GEN-LAST:event_jButtonTerminarSessaoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextFieldAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTextFieldAnoActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jTextFieldAno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAno2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jTextFieldAno2ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void jTextFieldAno3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAno3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_jTextFieldAno3ActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void jTextFieldAno4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAno4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_jTextFieldAno4ActionPerformed
 
     private void jButtonValorDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValorDespesaActionPerformed
         List<Factura> facturas = javaFactura.getFacturasWithNIF(contr.getNif());
@@ -457,6 +475,119 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
         novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         novoUserFrame.setVisible(true);
     }//GEN-LAST:event_jButtonValorDespesaActionPerformed
+
+    private void jButtonIntervaloDatasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIntervaloDatasActionPerformed
+        Integer ano, mes, dia, ano2, mes2, dia2,nif;
+         try{
+            nif = Integer.parseInt(jTextFieldNIFCliente.getText());
+        }
+        catch(NumberFormatException e){
+            nif = new Integer(-1);
+        }
+        try{
+            ano = Integer.parseInt(jTextFieldAno.getText());
+            mes = Integer.parseInt(jTextFieldMes.getText());
+            dia = Integer.parseInt(jTextFieldDia.getText());
+        }
+        catch(NumberFormatException e){
+            ano = new Integer(-1);
+            mes = new Integer(-1);
+            dia = new Integer(-1);
+        }
+        try{
+            ano2 = Integer.parseInt(jTextFieldAno2.getText());
+            mes2 = Integer.parseInt(jTextFieldMes2.getText());
+            dia2 = Integer.parseInt(jTextFieldDia2.getText());
+        }
+        catch(NumberFormatException e){
+            ano2 = new Integer(-1);
+            mes2 = new Integer(-1);
+            dia2 = new Integer(-1);
+        }
+        
+        if(ano < 0 || mes < 0 || dia < 0 || mes > 12 || dia > 31){
+            JOptionPane.showMessageDialog(this, "Data inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if(ano2 < 0 || mes2 < 0 || dia2 < 0 || mes2 > 12 || dia2 > 31){
+            JOptionPane.showMessageDialog(this, "Data inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if(nif == -1){
+            JOptionPane.showMessageDialog(this, "NIF de cliente inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            List<Factura> facturas = javaFactura.getFacturasEmpresaEntreDatas(nif,LocalDateTime.of(ano,mes,dia,0,0),LocalDateTime.of(ano2,mes2,dia2,0,0));
+            facturas.sort(new ComparatorFacturasData());
+            JFrame novoUserFrame = new ListaFaturas(this,contr,facturas);
+            novoUserFrame.addWindowListener(new WindowAdapter()
+                            {
+                                public void windowClosing(WindowEvent e)
+                                {
+                                   ((ListaFaturas)e.getWindow()).mostraAnterior();
+                                }
+                            });
+            this.setVisible(false);
+            novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            novoUserFrame.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonIntervaloDatasActionPerformed
+
+    private void jButtonValorDecrescenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValorDecrescenteActionPerformed
+        Integer nif; 
+        try{
+            nif = Integer.parseInt(jTextFieldNIFCliente.getText());
+        }
+        catch(NumberFormatException e){
+            nif = new Integer(-1);
+        }
+        if(nif == -1){
+            JOptionPane.showMessageDialog(this, "NIF de cliente inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            List<Factura> facturas = javaFactura. getFacturasEmpresaOrdenadaPorDespesa(nif,false);
+            JFrame novoUserFrame = new ListaFaturas(this,contr,facturas);
+            novoUserFrame.addWindowListener(new WindowAdapter()
+                            {
+                                public void windowClosing(WindowEvent e)
+                                {
+                                   ((ListaFaturas)e.getWindow()).mostraAnterior();
+                                }
+                            });
+            this.setVisible(false);
+            novoUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            novoUserFrame.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonValorDecrescenteActionPerformed
+
+    private void jButtonTotalFaturadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTotalFaturadoActionPerformed
+        Integer ano,mes,dia,ano2,mes2,dia2;
+        
+        try{
+            ano = Integer.parseInt(jTextFieldAno3.getText());
+            mes = Integer.parseInt(jTextFieldMes3.getText());
+            dia = Integer.parseInt(jTextFieldDia3.getText());
+        }
+        catch(NumberFormatException e){
+            ano = new Integer(-1);
+            mes = new Integer(-1);
+            dia = new Integer(-1);
+        }
+        try{
+            ano2 = Integer.parseInt(jTextFieldAno4.getText());
+            mes2 = Integer.parseInt(jTextFieldMes4.getText());
+            dia2 = Integer.parseInt(jTextFieldDia4.getText());
+        }
+        catch(NumberFormatException e){
+            ano2 = new Integer(-1);
+            mes2 = new Integer(-1);
+            dia2 = new Integer(-1);
+        }
+        
+        if(ano < 0 || mes < 0 || dia < 0 || mes > 12 || dia > 31){
+            JOptionPane.showMessageDialog(this, "Data inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if(ano2 < 0 || mes2 < 0 || dia2 < 0 || mes2 > 12 || dia2 > 31){
+            JOptionPane.showMessageDialog(this, "Data inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else{
+            float valorFaturado = 0;
+            valorFaturado = javaFactura.getFacturadoEntreDatas(contr.getNif(),LocalDateTime.of(ano,mes,dia,0,0),LocalDateTime.of(ano2,mes2,dia2,0,0));
+            JOptionPane.showMessageDialog(this, "Total faturado: " + valorFaturado, "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonTotalFaturadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -489,18 +620,18 @@ public class MenuContribuinteColetivo extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextFieldListaData1;
-    private javax.swing.JTextField jTextFieldListaData2;
-    private javax.swing.JTextField jTextFieldListaData3;
-    private javax.swing.JTextField jTextFieldListaData4;
-    private javax.swing.JTextField jTextFieldNIF;
+    private javax.swing.JTextField jTextFieldAno;
+    private javax.swing.JTextField jTextFieldAno2;
+    private javax.swing.JTextField jTextFieldAno3;
+    private javax.swing.JTextField jTextFieldAno4;
+    private javax.swing.JTextField jTextFieldDia;
+    private javax.swing.JTextField jTextFieldDia2;
+    private javax.swing.JTextField jTextFieldDia3;
+    private javax.swing.JTextField jTextFieldDia4;
+    private javax.swing.JTextField jTextFieldMes;
+    private javax.swing.JTextField jTextFieldMes2;
+    private javax.swing.JTextField jTextFieldMes3;
+    private javax.swing.JTextField jTextFieldMes4;
+    private javax.swing.JTextField jTextFieldNIFCliente;
     // End of variables declaration//GEN-END:variables
 }
